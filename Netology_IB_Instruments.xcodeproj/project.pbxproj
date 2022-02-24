@@ -13,6 +13,7 @@
 		7C189E3E27C82CCB00E683BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C189E3C27C82CCB00E683BF /* Main.storyboard */; };
 		7C189E4027C82CCE00E683BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C189E3F27C82CCE00E683BF /* Assets.xcassets */; };
 		7C189E4327C82CCE00E683BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C189E4127C82CCE00E683BF /* LaunchScreen.storyboard */; };
+		7C189E4B27C82EC900E683BF /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C189E4A27C82EC900E683BF /* ProfileView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		7C189E3F27C82CCE00E683BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C189E4227C82CCE00E683BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C189E4427C82CCE00E683BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C189E4A27C82EC900E683BF /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +42,7 @@
 		7C189E2A27C82CCB00E683BF = {
 			isa = PBXGroup;
 			children = (
+				7C189E4A27C82EC900E683BF /* ProfileView.xib */,
 				7C189E3527C82CCB00E683BF /* Netology_IB_Instruments */,
 				7C189E3427C82CCB00E683BF /* Products */,
 			);
@@ -125,6 +128,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C189E4B27C82EC900E683BF /* ProfileView.xib in Resources */,
 				7C189E4327C82CCE00E683BF /* LaunchScreen.storyboard in Resources */,
 				7C189E4027C82CCE00E683BF /* Assets.xcassets in Resources */,
 				7C189E3E27C82CCB00E683BF /* Main.storyboard in Resources */,
