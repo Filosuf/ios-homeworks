@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		7C189E3727C82CCB00E683BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C189E3627C82CCB00E683BF /* AppDelegate.swift */; };
 		7C189E3927C82CCB00E683BF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C189E3827C82CCB00E683BF /* SceneDelegate.swift */; };
-		7C189E3B27C82CCB00E683BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C189E3A27C82CCB00E683BF /* ViewController.swift */; };
-		7C189E3E27C82CCB00E683BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C189E3C27C82CCB00E683BF /* Main.storyboard */; };
 		7C189E4027C82CCE00E683BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C189E3F27C82CCE00E683BF /* Assets.xcassets */; };
 		7C189E4327C82CCE00E683BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C189E4127C82CCE00E683BF /* LaunchScreen.storyboard */; };
 		7C189E4B27C82EC900E683BF /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C189E4A27C82EC900E683BF /* ProfileView.xib */; };
@@ -23,8 +21,6 @@
 		7C189E3327C82CCB00E683BF /* Netology_IB_Instruments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Netology_IB_Instruments.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C189E3627C82CCB00E683BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C189E3827C82CCB00E683BF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7C189E3A27C82CCB00E683BF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7C189E3D27C82CCB00E683BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7C189E3F27C82CCE00E683BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C189E4227C82CCE00E683BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C189E4427C82CCE00E683BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -69,8 +65,6 @@
 			children = (
 				7C189E3627C82CCB00E683BF /* AppDelegate.swift */,
 				7C189E3827C82CCB00E683BF /* SceneDelegate.swift */,
-				7C189E3A27C82CCB00E683BF /* ViewController.swift */,
-				7C189E3C27C82CCB00E683BF /* Main.storyboard */,
 				7C189E3F27C82CCE00E683BF /* Assets.xcassets */,
 				7C189E4127C82CCE00E683BF /* LaunchScreen.storyboard */,
 				7C189E4427C82CCE00E683BF /* Info.plist */,
@@ -149,7 +143,6 @@
 				7C189E4327C82CCE00E683BF /* LaunchScreen.storyboard in Resources */,
 				7C189E4F27C83DE800E683BF /* Profile.storyboard in Resources */,
 				7C189E4027C82CCE00E683BF /* Assets.xcassets in Resources */,
-				7C189E3E27C82CCB00E683BF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,7 +154,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C189E4D27C836F900E683BF /* ProfileView.swift in Sources */,
-				7C189E3B27C82CCB00E683BF /* ViewController.swift in Sources */,
 				7C189E5127C83FD400E683BF /* ProfileViewController.swift in Sources */,
 				7C189E3727C82CCB00E683BF /* AppDelegate.swift in Sources */,
 				7C189E3927C82CCB00E683BF /* SceneDelegate.swift in Sources */,
@@ -171,14 +163,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		7C189E3C27C82CCB00E683BF /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7C189E3D27C82CCB00E683BF /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		7C189E4127C82CCE00E683BF /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

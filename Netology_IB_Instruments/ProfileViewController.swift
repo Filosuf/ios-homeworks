@@ -12,8 +12,11 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let firstView = Bundle.main.loadNibNamed("ProfileView", owner: nil, options: nil) as? ProfileView {
-            firstView.frame = CGRect(x: <#T##CGFloat#>, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>)
+        let screenWidth = UIScreen.main.bounds.width
+
+        if let firstView = Bundle.main.loadNibNamed("ProfileView", owner: nil, options: nil)?.first as? ProfileView {
+            firstView.frame = CGRect(x: 16, y: 100, width: screenWidth - 32, height: 400)
+            view.addSubview(firstView)
         }
     }
 
