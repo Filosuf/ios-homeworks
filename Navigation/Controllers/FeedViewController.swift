@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FeedViewController: UIViewController, PostDelegate {
+class FeedViewController: UIViewController {
 
     var post = Post(title: "Заголовок поста")
     
@@ -31,7 +31,7 @@ class FeedViewController: UIViewController, PostDelegate {
     @objc private func didTapPostButton() {
 
         let vc = PostViewController()
-        vc.delegate = self
+        vc.title = post.title
         navigationController?.pushViewController(vc, animated: true)
     }
 

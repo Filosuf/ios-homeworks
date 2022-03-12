@@ -7,21 +7,12 @@
 
 import UIKit
 
-class PostViewController: UIViewController, PostDelegate {
-
-    weak var delegate: PostDelegate?
-    
-    var post = Post()
+class PostViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .systemMint
-
-        if let temp = delegate?.post {
-            post = temp
-        }
-        title = post.title
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(dismissSelf))
 
