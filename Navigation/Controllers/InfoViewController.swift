@@ -16,7 +16,7 @@ class InfoViewController: UIViewController {
 
         view.backgroundColor = .systemOrange
         title = "Info"
-
+        
         alertButton.setTitle("Alert", for: .normal)
         view.addSubview(alertButton)
         alertButton.backgroundColor = .white
