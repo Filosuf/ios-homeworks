@@ -26,6 +26,7 @@ private var statusText = ""
         super.init(frame: frame)
 
         setupViews()
+        constraints()
     }
 
     required init?(coder aDecoder: NSCoder)
@@ -33,15 +34,7 @@ private var statusText = ""
              fatalError("init(coder:) has not been implemented")
     }
 
-    private func setupViews() {
-        self.addSubview(profileImage)
-        self.addSubview(nameLabel)
-        self.addSubview(statusLabel)
-        self.addSubview(showStatusButton)
-        self.addSubview(statusSetTextField)
-    }
-
-    let profileImage: UIImageView = {
+   private let profileImage: UIImageView = {
 
         let image = UIImageView()
         image.image = UIImage(named: "avatarDog.jpg")
@@ -50,31 +43,33 @@ private var statusText = ""
         image.layer.borderWidth = 3
         image.layer.borderColor = UIColor.white.cgColor
         image.clipsToBounds = true
-
+        image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
 
-    let nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
 
         let label = UILabel()
         label.text = "Добрый пёс"
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.translatesAutoresizingMaskIntoConstraints = false
 
         return label
     }()
 
-    let statusLabel: UILabel = {
+    private let statusLabel: UILabel = {
 
         let label = UILabel()
         label.text = "Я счастлив"
         label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
 
         return label
     }()
 
-    let showStatusButton: UIButton = {
+    private let showStatusButton: UIButton = {
 
         let button = UIButton()
         button.setTitle("Set status", for: .normal)
@@ -86,10 +81,12 @@ private var statusText = ""
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+
         return button
     }()
 
-    let statusSetTextField: UITextField = {
+    private let statusSetTextField: UITextField = {
 
         let textField = UITextField()
         textField.placeholder = "Введите новый статус"
@@ -102,6 +99,7 @@ private var statusText = ""
         textField.layer.borderColor = UIColor.black.cgColor
         textField.clipsToBounds = true
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
+        textField.translatesAutoresizingMaskIntoConstraints = false
 
         let spacerView = UIView(frame:CGRect(x:0, y:0, width:10, height:10))
         textField.leftViewMode = UITextField.ViewMode.always
@@ -120,14 +118,49 @@ private var statusText = ""
         }
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    private func constraints() {
+        NSLayoutConstraint.activate([
+            profileImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+            profileImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            profileImage.heightAnchor.constraint(equalToConstant: 100),
+            profileImage.widthAnchor.constraint(equalToConstant: 100)
+        ])
 
-        profileImage.frame = CGRect(x: 16, y: 16, width: 100, height: 100)
-        nameLabel.frame = CGRect(x: Int(profileImage.frame.maxX) + 20, y: 27, width: 150, height: 18)
-        showStatusButton.frame = CGRect(x: 16, y: profileImage.frame.maxY + 40, width: self.frame.width - 32, height: 50)
-        statusLabel.frame = CGRect(x: Int(profileImage.frame.maxX) + 20, y: Int(statusSetTextField.frame.minY) - 10 - 14, width: 150, height: 14)
-        statusSetTextField.frame = CGRect(x: Int(profileImage.frame.maxX) + 20, y: Int(showStatusButton.frame.minY) - 16 - 40, width: Int(self.frame.width) - Int(profileImage.frame.maxX) - 20 - 16, height: 40)
+        NSLayoutConstraint.activate([
+            nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
+            nameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
+            nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            nameLabel.heightAnchor.constraint(equalToConstant: 18)
+        ])
+
+        NSLayoutConstraint.activate([
+            showStatusButton.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 40),
+            showStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            showStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            showStatusButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+
+        NSLayoutConstraint.activate([
+            statusLabel.bottomAnchor.constraint(equalTo: statusSetTextField.topAnchor, constant: -10),
+            statusLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
+            statusLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            statusLabel.heightAnchor.constraint(equalToConstant: 14)
+        ])
+
+        NSLayoutConstraint.activate([
+            statusSetTextField.bottomAnchor.constraint(equalTo: showStatusButton.topAnchor, constant: -10),
+            statusSetTextField.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
+            statusSetTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            statusSetTextField.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
 
+    private func setupViews() {
+        self.addSubview(profileImage)
+        self.addSubview(nameLabel)
+        self.addSubview(statusLabel)
+        self.addSubview(showStatusButton)
+        self.addSubview(statusSetTextField)
+    }
+    
 }
