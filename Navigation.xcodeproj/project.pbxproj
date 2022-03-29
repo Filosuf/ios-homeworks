@@ -12,6 +12,8 @@
 		7C189E1B27C824E200E683BF /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C189E1A27C824E200E683BF /* MainTabBarController.swift */; };
 		7C189E2027C824E500E683BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C189E1F27C824E500E683BF /* Assets.xcassets */; };
 		7C189E2327C824E500E683BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C189E2127C824E500E683BF /* LaunchScreen.storyboard */; };
+		7C1E843627F38A0B00784897 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1E843527F38A0B00784897 /* LogInViewController.swift */; };
+		7C1E843827F3B2EE00784897 /* UIImage+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1E843727F3B2ED00784897 /* UIImage+Alpha.swift */; };
 		7CC5039D27D4C1DA00BAD3C1 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC5039C27D4C1DA00BAD3C1 /* FeedViewController.swift */; };
 		7CC5039F27D4C23C00BAD3C1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC5039E27D4C23C00BAD3C1 /* ProfileViewController.swift */; };
 		7CC503A127D520D900BAD3C1 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC503A027D520D900BAD3C1 /* PostViewController.swift */; };
@@ -29,6 +31,8 @@
 		7C189E1F27C824E500E683BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C189E2227C824E500E683BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C189E2427C824E500E683BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C1E843527F38A0B00784897 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		7C1E843727F3B2ED00784897 /* UIImage+Alpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Alpha.swift"; sourceTree = "<group>"; };
 		7CC5039C27D4C1DA00BAD3C1 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		7CC5039E27D4C23C00BAD3C1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7CC503A027D520D900BAD3C1 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +78,7 @@
 				7CC5039B27D2A32B00BAD3C1 /* Resources */,
 				7CC503A427D5298D00BAD3C1 /* Post.swift */,
 				7CC503A627D630D400BAD3C1 /* PostDelegate.swift */,
+				7C1E843727F3B2ED00784897 /* UIImage+Alpha.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -113,6 +118,7 @@
 			children = (
 				7CC503EE27DC69B300BAD3C1 /* ProfileHeaderView.swift */,
 				7CC5039E27D4C23C00BAD3C1 /* ProfileViewController.swift */,
+				7C1E843527F38A0B00784897 /* LogInViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -189,7 +195,9 @@
 			files = (
 				7CC503A127D520D900BAD3C1 /* PostViewController.swift in Sources */,
 				7C189E1B27C824E200E683BF /* MainTabBarController.swift in Sources */,
+				7C1E843627F38A0B00784897 /* LogInViewController.swift in Sources */,
 				7CC503A727D630D400BAD3C1 /* PostDelegate.swift in Sources */,
+				7C1E843827F3B2EE00784897 /* UIImage+Alpha.swift in Sources */,
 				7C189E1727C824E200E683BF /* AppDelegate.swift in Sources */,
 				7CC503A527D5298D00BAD3C1 /* Post.swift in Sources */,
 				7CC503A327D524EA00BAD3C1 /* InfoViewController.swift in Sources */,
