@@ -7,34 +7,22 @@
 
 import UIKit
 
-//class TestView: UIView {
-//
-//    var bezierPath: UIBezierPath!
-//
-//    override func draw(_ rect: CGRect) {
-//        super.draw(rect)
-//
-//        self.layer.borderWidth = 3
-//    }
-//}
-
 final class ProfileHeaderView: UIView {
 
 private var statusText = ""
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         setupViews()
         constraints()
     }
 
     required init?(coder aDecoder: NSCoder)
     {
-             fatalError("init(coder:) has not been implemented")
+        fatalError("init(coder:) has not been implemented")
     }
 
-   private let profileImage: UIImageView = {
+    private let profileImage: UIImageView = {
 
         let image = UIImageView()
         image.image = UIImage(named: "avatarDog.jpg")
@@ -44,6 +32,7 @@ private var statusText = ""
         image.layer.borderColor = UIColor.white.cgColor
         image.clipsToBounds = true
         image.translatesAutoresizingMaskIntoConstraints = false
+
         return image
     }()
 
@@ -86,7 +75,7 @@ private var statusText = ""
         return button
     }()
 
-    private let statusSetTextField: UITextField = {
+    private lazy var statusSetTextField: UITextField = {
 
         let textField = UITextField()
         textField.placeholder = "Введите новый статус"
@@ -98,6 +87,7 @@ private var statusText = ""
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.black.cgColor
         textField.clipsToBounds = true
+        textField.delegate = self
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         textField.translatesAutoresizingMaskIntoConstraints = false
 
@@ -110,6 +100,7 @@ private var statusText = ""
 
     @objc func buttonPressed() {
         statusLabel.text = statusText
+        self.endEditing(true)
     }
 
     @objc func statusTextChanged(_ textField: UITextField) {
@@ -163,4 +154,11 @@ private var statusText = ""
         self.addSubview(statusSetTextField)
     }
     
+}
+
+extension ProfileHeaderView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.endEditing(true)
+        return true
+    }
 }
