@@ -8,7 +8,10 @@
 import UIKit
 
 extension UIView {
-    static let identifier = String(describing: self)
+
+    static var identifier: String {
+        String(describing: self)
+    }
 
     func toAutoLayout() {
             translatesAutoresizingMaskIntoConstraints = false

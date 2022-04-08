@@ -15,6 +15,7 @@ class LogInViewController: UIViewController {
 
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+
         return scrollView
     }()
 
@@ -22,6 +23,7 @@ class LogInViewController: UIViewController {
 
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
+
         return contentView
     }()
 
@@ -30,6 +32,7 @@ class LogInViewController: UIViewController {
         let image = UIImageView()
         image.image = UIImage(named: "logo.png")
         image.translatesAutoresizingMaskIntoConstraints = false
+        
         return image
     }()
     private let color = UIColor(red: CGFloat(48) / 255.0, green: CGFloat(85) / 255.0, blue: CGFloat(15) / 255.0, alpha: 1.0)
@@ -83,6 +86,7 @@ class LogInViewController: UIViewController {
     }()
 
     private let logInButton: UIButton = {
+
         let button = UIButton()
         button.setTitle("Log In", for: .normal)
         button.setBackgroundImage(UIImage(named: "blue_pixel.png")!.alpha(1), for: .normal)
@@ -94,7 +98,7 @@ class LogInViewController: UIViewController {
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
-//        button.layer.al
+        
         return button
     }()
 
