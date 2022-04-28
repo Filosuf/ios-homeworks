@@ -47,7 +47,7 @@ class PhotosTableViewCell: UITableViewCell {
     private func layout() {
         let basicSpaceInterval: CGFloat = 12
         [photosLabel, goToGalleryButton, galleryImageFirst, galleryImageSecond, galleryImageThird, galleryImageFourth].forEach { contentView.addSubview($0) }
-
+        
         NSLayoutConstraint.activate([
             photosLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: basicSpaceInterval),
             photosLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: basicSpaceInterval),

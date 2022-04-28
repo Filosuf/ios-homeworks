@@ -28,6 +28,7 @@ class ProfileViewController: UIViewController {
         title = "Profile"
         view.backgroundColor = .white
         layout()
+        setupGesture()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -39,7 +40,27 @@ class ProfileViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-    
+
+    private func setupGesture() {
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+//        profileHeaderView.addGestureRecognizer(tapGesture)
+    }
+
+    @objc private func tapAction() {
+        print("Сработало нажатие")
+        let positionAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.position))
+        positionAnimation.fromValue = profileHeaderView.profileImage.center
+        positionAnimation.toValue = view.center
+//        print(positionAnimation.fromValue, positionAnimation.toValue)
+
+        let groupAnimation = CAAnimationGroup()
+        groupAnimation.duration = 2.0
+        groupAnimation.animations = [positionAnimation]
+        groupAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        profileHeaderView.profileImage.layer.add(groupAnimation, forKey: nil)
+        profileHeaderView.profileImage.layer.position = view.center
+    }
+
     private func layout() {
         [tableView].forEach { view.addSubview($0) }
 
@@ -80,8 +101,13 @@ extension ProfileViewController: UITableViewDataSource {
 extension ProfileViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = ProfileHeaderView()
-        return header
+//        let header = ProfileHeaderView()
+//        let avatar = header.profileImage
+        profileHeaderView.profileImage.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+        profileHeaderView.profileImage.addGestureRecognizer(tapGesture)
+//        header.addGestureRecognizer(tapGesture)
+        return profileHeaderView
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

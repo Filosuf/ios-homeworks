@@ -11,8 +11,13 @@ final class ProfileHeaderView: UIView {
 
 private var statusText = ""
 
+    private let profileImageRadius: CGFloat = 100
+    lazy var profileImageHeightConstrain = profileImage.heightAnchor.constraint(equalToConstant: profileImageRadius)
+    lazy var profileImageWidthConstrain = profileImage.widthAnchor.constraint(equalToConstant: profileImageRadius)
+
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .white
         setupViews()
         constraints()
     }
@@ -22,7 +27,7 @@ private var statusText = ""
         fatalError("init(coder:) has not been implemented")
     }
 
-    private let profileImage: UIImageView = {
+    let profileImage: UIImageView = {
 
         let image = UIImageView()
         image.image = UIImage(named: "avatarDog.jpg")
@@ -110,49 +115,57 @@ private var statusText = ""
     }
 
     private func constraints() {
+        let spaseInterval: CGFloat = 16
+
         NSLayoutConstraint.activate([
-            profileImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            profileImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            profileImage.heightAnchor.constraint(equalToConstant: 100),
-            profileImage.widthAnchor.constraint(equalToConstant: 100)
+            profileImage.topAnchor.constraint(equalTo: topAnchor, constant: spaseInterval),
+            profileImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spaseInterval),
+            profileImageHeightConstrain,
+            profileImageWidthConstrain
+//            profileImage.heightAnchor.constraint(equalToConstant: 100),
+//            profileImage.widthAnchor.constraint(equalToConstant: 100)
         ])
 
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
-            nameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
-            nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
+            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: profileImageRadius + spaseInterval * 2),
+            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spaseInterval),
             nameLabel.heightAnchor.constraint(equalToConstant: 18)
         ])
 
         NSLayoutConstraint.activate([
-            showStatusButton.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 40),
-            showStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            showStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            showStatusButton.topAnchor.constraint(equalTo: statusSetTextField.bottomAnchor, constant: 10),
+            showStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spaseInterval),
+            showStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spaseInterval),
             showStatusButton.heightAnchor.constraint(equalToConstant: 50)
         ])
 
         NSLayoutConstraint.activate([
-            statusLabel.bottomAnchor.constraint(equalTo: statusSetTextField.topAnchor, constant: -10),
-            statusLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
-            statusLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            statusLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 35),
+            statusLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            statusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spaseInterval),
             statusLabel.heightAnchor.constraint(equalToConstant: 14)
         ])
 
         NSLayoutConstraint.activate([
-            statusSetTextField.bottomAnchor.constraint(equalTo: showStatusButton.topAnchor, constant: -10),
-            statusSetTextField.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
-            statusSetTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            statusSetTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
+            statusSetTextField.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            statusSetTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spaseInterval),
             statusSetTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
 
     private func setupViews() {
-        self.addSubview(profileImage)
         self.addSubview(nameLabel)
         self.addSubview(statusLabel)
         self.addSubview(showStatusButton)
         self.addSubview(statusSetTextField)
+        self.addSubview(profileImage)    }
+
+    @objc private func tapAction() {
+        print("Сработало нажатие во view")
     }
+
     
 }
 

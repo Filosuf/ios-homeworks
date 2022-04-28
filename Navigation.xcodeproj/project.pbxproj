@@ -24,6 +24,7 @@
 		7CC503A527D5298D00BAD3C1 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC503A427D5298D00BAD3C1 /* Post.swift */; };
 		7CC503A727D630D400BAD3C1 /* PostDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC503A627D630D400BAD3C1 /* PostDelegate.swift */; };
 		7CC503EF27DC69B300BAD3C1 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC503EE27DC69B300BAD3C1 /* ProfileHeaderView.swift */; };
+		7CD45CD12812CB4200D1CAD2 /* ProfileHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD45CD02812CB4200D1CAD2 /* ProfileHeaderViewController.swift */; };
 		7CFD3C7427FEF829000D4F8C /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3C7327FEF829000D4F8C /* PhotosViewController.swift */; };
 		7CFD3C7627FF689F000D4F8C /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3C7527FF689F000D4F8C /* Photo.swift */; };
 		7CFD3C7827FF6DED000D4F8C /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3C7727FF6DED000D4F8C /* PhotosCollectionViewCell.swift */; };
@@ -50,6 +51,7 @@
 		7CC503A427D5298D00BAD3C1 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		7CC503A627D630D400BAD3C1 /* PostDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDelegate.swift; sourceTree = "<group>"; };
 		7CC503EE27DC69B300BAD3C1 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		7CD45CD02812CB4200D1CAD2 /* ProfileHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewController.swift; sourceTree = "<group>"; };
 		7CFD3C7327FEF829000D4F8C /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhotosViewController.swift; path = Profile/PhotosViewController.swift; sourceTree = "<group>"; };
 		7CFD3C7527FF689F000D4F8C /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Photo.swift; path = Profile/Photo.swift; sourceTree = "<group>"; };
 		7CFD3C7727FF6DED000D4F8C /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				7CC5039E27D4C23C00BAD3C1 /* ProfileViewController.swift */,
 				7C1E843927F827AC00784897 /* PostTableViewCell.swift */,
 				7C1E843527F38A0B00784897 /* LogInViewController.swift */,
+				7CD45CD02812CB4200D1CAD2 /* ProfileHeaderViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				7CFD3C7827FF6DED000D4F8C /* PhotosCollectionViewCell.swift in Sources */,
 				7C1E843C27F88B9800784897 /* UIView+Extension.swift in Sources */,
 				7CC503A327D524EA00BAD3C1 /* InfoViewController.swift in Sources */,
+				7CD45CD12812CB4200D1CAD2 /* ProfileHeaderViewController.swift in Sources */,
 				7CC5039F27D4C23C00BAD3C1 /* ProfileViewController.swift in Sources */,
 				7CC503EF27DC69B300BAD3C1 /* ProfileHeaderView.swift in Sources */,
 				7CC5039D27D4C1DA00BAD3C1 /* FeedViewController.swift in Sources */,
@@ -373,6 +377,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U4U42PQTLW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -399,6 +404,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U4U42PQTLW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
