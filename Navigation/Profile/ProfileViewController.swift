@@ -12,21 +12,28 @@ class ProfileViewController: UIViewController {
     let myPosts = Post.makeArrayPosts()
 
     let profileHeaderView = ProfileHeaderView()
+//    let profileHeaderView = ProfileHeaderViewAnimation()
 
-    private lazy var tableView: UITableView = {
+    static let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.dataSource = self
-        tableView.delegate = self
+//        tableView.dataSource = self
+//        tableView.delegate = self
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
         return tableView
     }()
 
+    func setTableView() {
+        ProfileViewController.tableView.dataSource = self
+        ProfileViewController.tableView.delegate = self
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Profile"
         view.backgroundColor = .white
+        setTableView()
         layout()
         setupGesture()
     }
@@ -62,14 +69,14 @@ class ProfileViewController: UIViewController {
     }
 
     private func layout() {
-        [tableView].forEach { view.addSubview($0) }
+        [ProfileViewController.tableView].forEach { view.addSubview($0) }
 
         NSLayoutConstraint.activate([
 
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            ProfileViewController.tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            ProfileViewController.tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            ProfileViewController.tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            ProfileViewController.tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 
@@ -103,9 +110,9 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 //        let header = ProfileHeaderView()
 //        let avatar = header.profileImage
-        profileHeaderView.profileImage.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
-        profileHeaderView.profileImage.addGestureRecognizer(tapGesture)
+//        profileHeaderView.profileImage.isUserInteractionEnabled = true
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+//        profileHeaderView.profileImage.addGestureRecognizer(tapGesture)
 //        header.addGestureRecognizer(tapGesture)
         return profileHeaderView
     }
