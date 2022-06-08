@@ -19,7 +19,7 @@ class MainTabBarController: UITabBarController {
 
         let feedViewController = createNavController(vc: FeedViewController(), itemName: "Feed", itemImage: "list.bullet")
         let profileViewController = createNavController(vc: LogInViewController(), itemName: "Profile", itemImage: "person.crop.circle")
-        profileViewController.navigationBar.isHidden = true
+//        profileViewController.navigationBar.isHidden = false
         viewControllers = [feedViewController, profileViewController]
     }
 

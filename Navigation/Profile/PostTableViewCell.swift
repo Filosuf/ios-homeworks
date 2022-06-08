@@ -9,13 +9,6 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
 
-    private let contentCellView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.toAutoLayout()
-        return view
-    }()
-
     private let postAuthorLabel: UILabel = {
 
         let label = UILabel()
@@ -70,7 +63,6 @@ class PostTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        customizeCell()
         layout()
     }
 
@@ -78,7 +70,7 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setupSell(post: Post) {
+    func setupCell(post: Post) {
         postAuthorLabel.text = post.author
         postImage.image = UIImage(named: post.image)
         postDescriptionLabel.text = post.description
@@ -86,18 +78,8 @@ class PostTableViewCell: UITableViewCell {
         postViewsLabel.text = "Views: \(post.views)"
     }
 
-    private func customizeCell() {
-
-//        postTitleLabel.backgroundColor = .red
-//        postImage.backgroundColor = .blue
-//        postDescriptionLabel.backgroundColor = .systemOrange
-//        postLikesLabel.backgroundColor = .systemMint
-//        postViewsLabel.backgroundColor = .magenta
-    }
-
     private func layout() {
         let spaceInterval: CGFloat = 16
-//        contentView.addSubview(contentCellView)
         [postAuthorLabel, postImage, postDescriptionLabel, postLikesLabel, postViewsLabel].forEach { contentView.addSubview($0) }
 
         NSLayoutConstraint.activate([
