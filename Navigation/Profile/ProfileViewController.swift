@@ -12,7 +12,6 @@ class ProfileViewController: UIViewController {
     let myPosts = Post.makeArrayPosts()
 
     let profileHeaderView = ProfileHeaderView()
-//    let profileHeaderView = ProfileHeaderViewAnimation()
 
     static let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)

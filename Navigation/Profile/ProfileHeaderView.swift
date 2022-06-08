@@ -40,7 +40,8 @@ final class ProfileHeaderView: UIView {
         private lazy var xmarkButton: UIButton = {
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.setImage(UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40))?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+            button.setImage(UIImage(named: "xmark"), for: .normal)
+//            button.setImage(UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40))?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
             button.layer.opacity = 0
             button.backgroundColor = .clear
             button.addTarget(self, action: #selector(self.hideAvatar), for: .touchUpInside)

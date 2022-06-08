@@ -22,8 +22,9 @@ class PhotosTableViewCell: UITableViewCell {
 
     private let goToGalleryButton: UIButton = {
         let button = UIButton()
-        button.setBackgroundImage(UIImage(systemName: "arrow.forward"), for: .normal)
-        button.tintColor = .black
+        button.setBackgroundImage(UIImage(named: "arrow.forward"), for: .normal)
+//        button.setBackgroundImage(UIImage(systemName: "arrow.forward"), for: .normal)
+//        button.tintColor = .black
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
 

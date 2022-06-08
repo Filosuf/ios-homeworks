@@ -42,7 +42,7 @@ class LogInViewController: UIViewController {
         let textField = UITextField()
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
-        textField.backgroundColor = .systemGray6
+        textField.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         textField.placeholder = "Email or phone"
         textField.tintColor = UIColor(named: "#4885CC")
         textField.keyboardType = .emailAddress
@@ -66,7 +66,7 @@ class LogInViewController: UIViewController {
         let textField = UITextField()
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
-        textField.backgroundColor = .systemGray6
+        textField.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         textField.placeholder = "Password"
         textField.isSecureTextEntry = true
         textField.tintColor = UIColor(named: "#4885CC")
