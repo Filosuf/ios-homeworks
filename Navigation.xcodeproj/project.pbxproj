@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7C189E1727C824E200E683BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C189E1627C824E200E683BF /* AppDelegate.swift */; };
-		7C189E1927C824E200E683BF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C189E1827C824E200E683BF /* SceneDelegate.swift */; };
 		7C189E1B27C824E200E683BF /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C189E1A27C824E200E683BF /* MainTabBarController.swift */; };
 		7C189E2027C824E500E683BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C189E1F27C824E500E683BF /* Assets.xcassets */; };
 		7C189E2327C824E500E683BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C189E2127C824E500E683BF /* LaunchScreen.storyboard */; };
@@ -33,7 +32,6 @@
 /* Begin PBXFileReference section */
 		7C189E1327C824E200E683BF /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C189E1627C824E200E683BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7C189E1827C824E200E683BF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7C189E1A27C824E200E683BF /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7C189E1F27C824E500E683BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C189E2227C824E500E683BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -106,7 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				7C189E1627C824E200E683BF /* AppDelegate.swift */,
-				7C189E1827C824E200E683BF /* SceneDelegate.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -232,7 +229,6 @@
 				7CC5039F27D4C23C00BAD3C1 /* ProfileViewController.swift in Sources */,
 				7CC503EF27DC69B300BAD3C1 /* ProfileHeaderView.swift in Sources */,
 				7CC5039D27D4C1DA00BAD3C1 /* FeedViewController.swift in Sources */,
-				7C189E1927C824E200E683BF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
