@@ -33,7 +33,11 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Profile"
-        view.backgroundColor = .white
+        #if DEBUG
+            view.backgroundColor = .systemMint
+        #else
+            view.backgroundColor = .white
+        #endif
         setTableView()
         layout()
         setupGesture()
