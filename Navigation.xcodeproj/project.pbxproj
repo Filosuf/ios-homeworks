@@ -14,6 +14,7 @@
 		7C189E1B27C824E200E683BF /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C189E1A27C824E200E683BF /* MainTabBarController.swift */; };
 		7C189E2027C824E500E683BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C189E1F27C824E500E683BF /* Assets.xcassets */; };
 		7C189E2327C824E500E683BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C189E2127C824E500E683BF /* LaunchScreen.storyboard */; };
+		7C1C68C0285510A800F4B9B8 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 7C1C68BF285510A800F4B9B8 /* iOSIntPackage */; };
 		7C1E843627F38A0B00784897 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1E843527F38A0B00784897 /* LogInViewController.swift */; };
 		7C1E843827F3B2EE00784897 /* UIImage+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1E843727F3B2ED00784897 /* UIImage+Alpha.swift */; };
 		7C1E843A27F827AC00784897 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1E843927F827AC00784897 /* PostTableViewCell.swift */; };
@@ -91,6 +92,7 @@
 		7C189E1F27C824E500E683BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C189E2227C824E500E683BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C189E2427C824E500E683BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C1C68BD2854D8CE00F4B9B8 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = "../../Libraries/iOSIntPackage-main/Package.swift"; sourceTree = "<group>"; };
 		7C1E843527F38A0B00784897 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		7C1E843727F3B2ED00784897 /* UIImage+Alpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Alpha.swift"; sourceTree = "<group>"; };
 		7C1E843927F827AC00784897 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C1C68C0285510A800F4B9B8 /* iOSIntPackage in Frameworks */,
 				7C2A37B92852320600BAD47A /* StorageService.framework in Frameworks */,
 				A7CE333534EAF8F2C840D207 /* Pods_Navigation.framework in Frameworks */,
 			);
@@ -157,13 +160,13 @@
 				080F8E63D3A2A2FD8525F365 /* Pods-StorageService-StorageServiceTests.debug.xcconfig */,
 				1264E1302E2B72FB33F46F6A /* Pods-StorageService-StorageServiceTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		3C7827AF1306226311B854F1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7C1C68BD2854D8CE00F4B9B8 /* Package.swift */,
 				7EA4E7DC91912788E6BDC1BB /* Pods_Navigation.framework */,
 				33672E27FA418AEA970CFEAC /* Pods_StorageService.framework */,
 				8CCB9F7F838A3C46B4FE2770 /* Pods_StorageService_StorageServiceTests.framework */,
@@ -302,6 +305,9 @@
 				7C2A37B82852320600BAD47A /* PBXTargetDependency */,
 			);
 			name = Navigation;
+			packageProductDependencies = (
+				7C1C68BF285510A800F4B9B8 /* iOSIntPackage */,
+			);
 			productName = Navigation;
 			productReference = 7C189E1327C824E200E683BF /* Navigation.app */;
 			productType = "com.apple.product-type.application";
@@ -376,6 +382,9 @@
 				Base,
 			);
 			mainGroup = 7C189E0A27C824E200E683BF;
+			packageReferences = (
+				7C1C68BE285510A800F4B9B8 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+			);
 			productRefGroup = 7C189E1427C824E200E683BF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -892,6 +901,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7C1C68BE285510A800F4B9B8 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TrueMax/iOSIntPackage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7C1C68BF285510A800F4B9B8 /* iOSIntPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C1C68BE285510A800F4B9B8 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
+			productName = iOSIntPackage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7C189E0B27C824E200E683BF /* Project object */;
 }
