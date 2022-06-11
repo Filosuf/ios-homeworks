@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class ProfileHeaderView: UIView {
 
@@ -13,8 +14,6 @@ final class ProfileHeaderView: UIView {
     private var defaultAvatarCenter: CGPoint = CGPoint(x: 0, y: 0)
 
         private let profileImageRadius: CGFloat = 100
-        lazy var profileImageHeightConstrain = profileImage.heightAnchor.constraint(equalToConstant: profileImageRadius)
-        lazy var profileImageWidthConstrain = profileImage.widthAnchor.constraint(equalToConstant: profileImageRadius)
 
         override init(frame: CGRect) {
             super.init(frame: frame)
@@ -131,7 +130,6 @@ final class ProfileHeaderView: UIView {
             UIImageView.animate(withDuration: 0.5,
                                 animations: {
                 self.defaultAvatarCenter = self.profileImage.center
-    //            self.profileImage.center = CGPoint(x: UIScreen.main.bounds.midX, y: (UIScreen.main.bounds.midY + ProfileViewController.tableView.contentOffset.y))
                 self.profileImage.center = CGPoint(x: UIScreen.main.bounds.midX, y: (UIScreen.main.bounds.midY - 40))
                 self.profileImage.transform = CGAffineTransform(scaleX: self.bounds.width / self.profileImage.frame.width, y: self.bounds.width / self.profileImage.frame.width)
                 self.profileImage.layer.cornerRadius = 0
@@ -190,37 +188,45 @@ final class ProfileHeaderView: UIView {
 
             [nameLabel, statusLabel, showStatusButton, statusSetTextField, blurEffectView, profileImage, xmarkButton].forEach { self.addSubview($0) }
 
-            NSLayoutConstraint.activate([
-                profileImage.topAnchor.constraint(equalTo: topAnchor, constant: spaseInterval),
-                profileImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spaseInterval),
-                profileImageHeightConstrain,
-                profileImageWidthConstrain,
-    //            profileImage.heightAnchor.constraint(equalToConstant: 100),
-    //            profileImage.widthAnchor.constraint(equalToConstant: 100),
+            profileImage.snp.makeConstraints{
+                $0.top.equalToSuperview().offset(spaseInterval)
+                $0.leading.equalToSuperview().offset(spaseInterval)
+                $0.height.equalTo(profileImageRadius)
+                $0.width.equalTo(profileImageRadius)
+            }
 
-                nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
-                nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: profileImageRadius + spaseInterval * 2),
-                nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spaseInterval),
-                nameLabel.heightAnchor.constraint(equalToConstant: 18),
+            nameLabel.snp.makeConstraints{
+                $0.top.equalToSuperview().offset(27)
+                $0.leading.equalToSuperview().offset(profileImageRadius + spaseInterval * 2)
+                $0.trailing.equalToSuperview().offset(-spaseInterval)
+                $0.height.equalTo(18)
+            }
 
-                showStatusButton.topAnchor.constraint(equalTo: statusSetTextField.bottomAnchor, constant: 10),
-                showStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spaseInterval),
-                showStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spaseInterval),
-                showStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            showStatusButton.snp.makeConstraints{
+                $0.top.equalTo(statusSetTextField.snp.bottom).offset(10)
+                $0.leading.equalToSuperview().offset(spaseInterval)
+                $0.trailing.equalToSuperview().offset(-spaseInterval)
+                $0.height.equalTo(50)
+            }
 
-                statusLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 35),
-                statusLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-                statusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spaseInterval),
-                statusLabel.heightAnchor.constraint(equalToConstant: 14),
+            statusLabel.snp.makeConstraints{
+                $0.top.equalTo(nameLabel.snp.bottom).offset(35)
+                $0.leading.equalTo(nameLabel.snp.leading)
+                $0.trailing.equalToSuperview().offset(-spaseInterval)
+                $0.height.equalTo(14)
+            }
 
-                statusSetTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
-                statusSetTextField.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-                statusSetTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spaseInterval),
-                statusSetTextField.heightAnchor.constraint(equalToConstant: 40),
+            statusSetTextField.snp.makeConstraints{
+                $0.top.equalTo(statusLabel.snp.bottom).offset(10)
+                $0.leading.equalTo(nameLabel.snp.leading)
+                $0.trailing.equalToSuperview().offset(-spaseInterval)
+                $0.height.equalTo(40)
+            }
 
-                xmarkButton.topAnchor.constraint(equalTo: topAnchor, constant: spaseInterval),
-                xmarkButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spaseInterval)
-            ])
+            xmarkButton.snp.makeConstraints{
+                $0.top.equalToSuperview().offset(spaseInterval)
+                $0.trailing.equalToSuperview().offset(-spaseInterval)
+            }
         }
 
     }

@@ -34,13 +34,12 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         title = "Profile"
         #if DEBUG
-            view.backgroundColor = .systemMint
+            view.backgroundColor = .white
         #else
             view.backgroundColor = .white
         #endif
         setTableView()
         layout()
-        setupGesture()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -53,17 +52,11 @@ class ProfileViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
-    private func setupGesture() {
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
-//        profileHeaderView.addGestureRecognizer(tapGesture)
-    }
-
     @objc private func tapAction() {
         print("Сработало нажатие")
         let positionAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.position))
         positionAnimation.fromValue = profileHeaderView.profileImage.center
         positionAnimation.toValue = view.center
-//        print(positionAnimation.fromValue, positionAnimation.toValue)
 
         let groupAnimation = CAAnimationGroup()
         groupAnimation.duration = 2.0
@@ -113,12 +106,6 @@ extension ProfileViewController: UITableViewDataSource {
 extension ProfileViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let header = ProfileHeaderView()
-//        let avatar = header.profileImage
-//        profileHeaderView.profileImage.isUserInteractionEnabled = true
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
-//        profileHeaderView.profileImage.addGestureRecognizer(tapGesture)
-//        header.addGestureRecognizer(tapGesture)
         return profileHeaderView
     }
 
