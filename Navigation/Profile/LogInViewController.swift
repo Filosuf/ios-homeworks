@@ -133,7 +133,12 @@ class LogInViewController: UIViewController {
     }
 
     @objc func buttonPressed() {
-        let vc = ProfileViewController()
+        #if DEBUG
+            let userService = TestUserService()
+        #else
+            let userService = CurrentUserService()
+        #endif
+        let vc = ProfileViewController(userService: userService, userName: loginTextField.text ?? "")
         navigationController?.pushViewController(vc, animated: true)
     }
 

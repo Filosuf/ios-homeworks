@@ -12,6 +12,8 @@ import StorageService
 class ProfileViewController: UIViewController {
 
     let myPosts = Post.makeArrayPosts()
+    private let userService: UserService
+    private let userName: String
 
     let profileHeaderView = ProfileHeaderView()
 
@@ -25,9 +27,14 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
 
-    func setTableView() {
-        ProfileViewController.tableView.dataSource = self
-        ProfileViewController.tableView.delegate = self
+    init(userService: UserService, userName: String) {
+        self.userService = userService
+        self.userName = userName
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
@@ -39,6 +46,7 @@ class ProfileViewController: UIViewController {
             view.backgroundColor = .white
         #endif
         setTableView()
+        profileHeaderView.setupView(user: userService.getUser(userName: userName))
         layout()
     }
 
@@ -52,18 +60,9 @@ class ProfileViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
-    @objc private func tapAction() {
-        print("Сработало нажатие")
-        let positionAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.position))
-        positionAnimation.fromValue = profileHeaderView.profileImage.center
-        positionAnimation.toValue = view.center
-
-        let groupAnimation = CAAnimationGroup()
-        groupAnimation.duration = 2.0
-        groupAnimation.animations = [positionAnimation]
-        groupAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        profileHeaderView.profileImage.layer.add(groupAnimation, forKey: nil)
-        profileHeaderView.profileImage.layer.position = view.center
+    func setTableView() {
+        ProfileViewController.tableView.dataSource = self
+        ProfileViewController.tableView.delegate = self
     }
 
     private func layout() {
