@@ -9,6 +9,7 @@ import UIKit
 
 class LogInViewController: UIViewController {
 
+    var delegate: LoginViewControllerDelegate?
     private let nc = NotificationCenter.default
 
     private let scrollView: UIScrollView = {
@@ -133,13 +134,21 @@ class LogInViewController: UIViewController {
     }
 
     @objc func buttonPressed() {
+        guard let authorizationSuccessful = delegate?.check(login: loginTextField.text!, password: passwordTextField.text!) else {
+            print("File:" + #file, "\nFunction: " + #function + "\nError message: Не удалось выполнить проверку пары Логин/Пароль")
+            return
+        }
         #if DEBUG
             let userService = TestUserService()
         #else
             let userService = CurrentUserService()
         #endif
         let vc = ProfileViewController(userService: userService, userName: loginTextField.text ?? "")
-        navigationController?.pushViewController(vc, animated: true)
+        if authorizationSuccessful {
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            print("File:" + #file, "\nFunction: " + #function + "\nError message: Пара Логин/Пароль не найдена")
+        }
     }
 
     private func layout() {

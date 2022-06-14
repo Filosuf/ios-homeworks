@@ -18,8 +18,9 @@ class MainTabBarController: UITabBarController {
     func setupTabBar() {
 
         let feedViewController = createNavController(vc: FeedViewController(), itemName: "Feed", itemImage: "list.bullet")
-        let profileViewController = createNavController(vc: LogInViewController(), itemName: "Profile", itemImage: "person.crop.circle")
-//        profileViewController.navigationBar.isHidden = false
+        let logInVC = LogInViewController()
+        logInVC.delegate = LoginInspector()
+        let profileViewController = createNavController(vc: logInVC, itemName: "Profile", itemImage: "person.crop.circle")
         viewControllers = [feedViewController, profileViewController]
     }
 
