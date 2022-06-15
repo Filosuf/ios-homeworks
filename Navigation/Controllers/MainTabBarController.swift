@@ -9,6 +9,8 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
 
+    let loginFactory = MyLoginFactory()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,7 +21,7 @@ class MainTabBarController: UITabBarController {
 
         let feedViewController = createNavController(vc: FeedViewController(), itemName: "Feed", itemImage: "list.bullet")
         let logInVC = LogInViewController()
-        logInVC.delegate = LoginInspector()
+        logInVC.delegate = loginFactory.makeLoginInspector()
         let profileViewController = createNavController(vc: logInVC, itemName: "Profile", itemImage: "person.crop.circle")
         viewControllers = [feedViewController, profileViewController]
     }

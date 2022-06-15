@@ -135,7 +135,7 @@ class LogInViewController: UIViewController {
 
     @objc func buttonPressed() {
         guard let authorizationSuccessful = delegate?.check(login: loginTextField.text!, password: passwordTextField.text!) else {
-            print("File:" + #file, "\nFunction: " + #function + "\nError message: Не удалось выполнить проверку пары Логин/Пароль")
+            print("File:" + #file, "\nFunction: " + #function + "\nError message: Не удалось выполнить проверку пары Логин/Пароль\n")
             return
         }
         #if DEBUG
@@ -147,7 +147,7 @@ class LogInViewController: UIViewController {
         if authorizationSuccessful {
             navigationController?.pushViewController(vc, animated: true)
         } else {
-            print("File:" + #file, "\nFunction: " + #function + "\nError message: Пара Логин/Пароль не найдена")
+            print("File:" + #file, "\nFunction: " + #function + "\nError message: Пара Логин/Пароль не найдена\n")
         }
     }
 
