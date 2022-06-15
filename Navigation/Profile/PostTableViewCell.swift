@@ -79,7 +79,7 @@ class PostTableViewCell: UITableViewCell {
         //add random filter for image
         if let image = UIImage(named: post.image) {
             let filter = ColorFilter.allCases[Int.random(in: 0..<ColorFilter.allCases.count)]
-            ImageProcessor().processImage(sourceImage: image, filter: filter, completion: {postImage.image = $0})
+            ImageProcessor().processImage(sourceImage: image, filter: filter) {postImage.image = $0}
         }
         postDescriptionLabel.text = post.description
         postLikesLabel.text = "Likes: \(post.likes)"

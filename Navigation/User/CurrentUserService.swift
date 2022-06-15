@@ -13,9 +13,7 @@ final class CurrentUserService: UserService {
     let user = User(name: "Добрый пёс", avatar: UIImage(named: "avatarDog.jpg")!, status: "Я счастлив")
 
     func getUser(userName: String) -> User? {
-        if user.name == userName {
-            return user }
-        return nil
+        user.name == userName ? user : nil
     }
 
 
