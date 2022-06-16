@@ -17,9 +17,6 @@ class Checker {
     private init() {}
 
     func authorization(login: String, password: String) -> Bool {
-        if self.login.hash == login.hash, self.password.hash == password.hash {
-            return true
-        }
-        return false
+        return self.login.hash == login.hash && self.password.hash == password.hash
     }
 }

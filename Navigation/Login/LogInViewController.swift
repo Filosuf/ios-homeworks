@@ -161,40 +161,30 @@ class LogInViewController: UIViewController {
             logoImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
             logoImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             logoImage.heightAnchor.constraint(equalToConstant: 100),
-            logoImage.widthAnchor.constraint(equalToConstant: 100)
-        ])
+            logoImage.widthAnchor.constraint(equalToConstant: 100),
 
-        NSLayoutConstraint.activate([
             loginTextField.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 120),
             loginTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             loginTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            loginTextField.heightAnchor.constraint(equalToConstant: 50)
-        ])
+            loginTextField.heightAnchor.constraint(equalToConstant: 50),
 
-        NSLayoutConstraint.activate([
             passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor),
             passwordTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             passwordTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 50)
-        ])
+            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
 
-        NSLayoutConstraint.activate([
             logInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
             logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
-            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
+            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 
-        NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
-        ])
-
-        NSLayoutConstraint.activate([
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
