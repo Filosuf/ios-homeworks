@@ -17,6 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = MainTabBarController()
+//        window?.rootViewController = ProfileViewController(userService: TestUserService(), userName: "login")
+//        window?.rootViewController = PhotosViewController()
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light
     }

@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
 
-    private let photosArray = Photo.makeArrayPhotos()
+    var imagePublisherFacade = ImagePublisherFacade()
+    private var imagesArray = [UIImage]()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -28,6 +30,12 @@ class PhotosViewController: UIViewController {
         title = "Photo Gallery"
         view.backgroundColor = .white
         layout()
+        imagePublisherFacade.subscribe(self)
+        imagePublisherFacade.addImagesWithTimer(time: 1, repeat: 20, userImages: Photo.makeArrayImages())
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        imagePublisherFacade.removeSubscription(for: self)
     }
 
     private func layout() {
@@ -47,20 +55,18 @@ class PhotosViewController: UIViewController {
 
 extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        photosArray.count
+        imagesArray.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.identifier, for: indexPath) as! PhotosCollectionViewCell
-        cell.setupCell(photo: photosArray[indexPath.row])
+        cell.setupCell(photo: imagesArray[indexPath.row])
         return cell
     }
-
-
-
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
+
 extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     private var sideInset: CGFloat { return 8}
 
@@ -79,4 +85,15 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: sideInset, left: sideInset, bottom: sideInset, right: sideInset)
     }
+}
+
+//MARK: - ImageLibrarySubscriber
+
+extension PhotosViewController: ImageLibrarySubscriber {
+
+    func receive(images: [UIImage]) {
+        imagesArray = images
+        collectionView.reloadData()
+    }
+
 }
