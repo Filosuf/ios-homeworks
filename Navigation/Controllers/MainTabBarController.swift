@@ -9,17 +9,28 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
 
+    let loginFactory: MyLoginFactory
+
+    init(loginFactory: MyLoginFactory) {
+        self.loginFactory = loginFactory
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupTabBar()
     }
 
     func setupTabBar() {
 
         let feedViewController = createNavController(vc: FeedViewController(), itemName: "Feed", itemImage: "list.bullet")
-        let profileViewController = createNavController(vc: LogInViewController(), itemName: "Profile", itemImage: "person.crop.circle")
-//        profileViewController.navigationBar.isHidden = false
+        let logInVC = LogInViewController()
+        logInVC.delegate = loginFactory.makeLoginInspector()
+        let profileViewController = createNavController(vc: logInVC, itemName: "Profile", itemImage: "person.crop.circle")
         viewControllers = [feedViewController, profileViewController]
     }
 

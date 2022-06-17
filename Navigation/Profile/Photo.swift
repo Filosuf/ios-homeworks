@@ -9,13 +9,21 @@ import UIKit
 
 struct Photo {
     let imageName: String
+    let photo: UIImage
 
     static func makeArrayPhotos() -> [Photo] {
-        var photos = [Photo]()
+        var names = [Photo]()
         for index in 1...20 {
-            photos.append(Photo(imageName: "\(index)"))
+            names.append(Photo(imageName: "\(index)", photo: UIImage(named: "\(index)")!))
         }
-        return photos
+        return names
     }
 
+    static func makeArrayImages() -> [UIImage] {
+        var images = [UIImage]()
+        for index in 1...20 {
+            images.append(UIImage(named: "\(index)")!)
+        }
+        return images
+    }
 }

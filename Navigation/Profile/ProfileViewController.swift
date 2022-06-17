@@ -5,11 +5,15 @@
 //  Created by 1234 on 06.03.2022.
 //
 
+
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController {
 
     let myPosts = Post.makeArrayPosts()
+    private let userService: UserService
+    private let userName: String
 
     let profileHeaderView = ProfileHeaderView()
 
@@ -23,18 +27,27 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
 
-    func setTableView() {
-        ProfileViewController.tableView.dataSource = self
-        ProfileViewController.tableView.delegate = self
+    init(userService: UserService, userName: String) {
+        self.userService = userService
+        self.userName = userName
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Profile"
-        view.backgroundColor = .white
+        #if DEBUG
+            view.backgroundColor = .white
+        #else
+            view.backgroundColor = .white
+        #endif
         setTableView()
+        profileHeaderView.setupView(user: userService.getUser(userName: userName))
         layout()
-        setupGesture()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -47,24 +60,9 @@ class ProfileViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
-    private func setupGesture() {
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
-//        profileHeaderView.addGestureRecognizer(tapGesture)
-    }
-
-    @objc private func tapAction() {
-        print("Сработало нажатие")
-        let positionAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.position))
-        positionAnimation.fromValue = profileHeaderView.profileImage.center
-        positionAnimation.toValue = view.center
-//        print(positionAnimation.fromValue, positionAnimation.toValue)
-
-        let groupAnimation = CAAnimationGroup()
-        groupAnimation.duration = 2.0
-        groupAnimation.animations = [positionAnimation]
-        groupAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        profileHeaderView.profileImage.layer.add(groupAnimation, forKey: nil)
-        profileHeaderView.profileImage.layer.position = view.center
+    func setTableView() {
+        ProfileViewController.tableView.dataSource = self
+        ProfileViewController.tableView.delegate = self
     }
 
     private func layout() {
@@ -107,12 +105,6 @@ extension ProfileViewController: UITableViewDataSource {
 extension ProfileViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let header = ProfileHeaderView()
-//        let avatar = header.profileImage
-//        profileHeaderView.profileImage.isUserInteractionEnabled = true
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
-//        profileHeaderView.profileImage.addGestureRecognizer(tapGesture)
-//        header.addGestureRecognizer(tapGesture)
         return profileHeaderView
     }
 

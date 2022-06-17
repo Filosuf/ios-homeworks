@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import StorageService
+import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell {
+
+    private let imageProcessor = ImageProcessor()
 
     private let postAuthorLabel: UILabel = {
 
@@ -72,7 +76,11 @@ class PostTableViewCell: UITableViewCell {
 
     func setupCell(post: Post) {
         postAuthorLabel.text = post.author
-        postImage.image = UIImage(named: post.image)
+        //add random filter for image
+        if let image = UIImage(named: post.image) {
+            let filter = ColorFilter.allCases[Int.random(in: 0..<ColorFilter.allCases.count)]
+            ImageProcessor().processImage(sourceImage: image, filter: filter) {postImage.image = $0}
+        }
         postDescriptionLabel.text = post.description
         postLikesLabel.text = "Likes: \(post.likes)"
         postViewsLabel.text = "Views: \(post.views)"

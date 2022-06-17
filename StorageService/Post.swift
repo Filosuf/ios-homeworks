@@ -5,15 +5,15 @@
 //  Created by 1234 on 06.03.2022.
 //
 
-struct Post {
-    let title: String
-    let author: String //- никнейм автора публикации
-    let description: String //- текст публикации
-    let image: String //- имя картинки из каталога Assets.xcassets
-    var likes: Int //- количество лайков
-    var views: Int //- количество просмотров
+public struct Post {
+    public let title: String
+    public let author: String //- никнейм автора публикации
+    public let description: String //- текст публикации
+    public let image: String //- имя картинки из каталога Assets.xcassets
+    public var likes: Int //- количество лайков
+    public var views: Int //- количество просмотров
 
-    init (title: String = "", author: String = "", description: String = "", image: String = "", likes: Int = 0, views: Int = 0) {
+    public init (title: String = "", author: String = "", description: String = "", image: String = "", likes: Int = 0, views: Int = 0) {
         self.title = title
         self.author = author
         self.description = description
@@ -23,7 +23,7 @@ struct Post {
     }
 
 
-    static func makeArrayPosts() -> [Post] {
+    public static func makeArrayPosts() -> [Post] {
         var posts = [Post]()
         posts.append(Post(
             author: "Dog",
