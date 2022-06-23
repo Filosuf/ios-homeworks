@@ -10,21 +10,12 @@ import SnapKit
 
 final class ProfileHeaderView: UIView {
 
+    //MARK: - Properties
+    
     private var statusText = ""
     private var defaultAvatarCenter: CGPoint = CGPoint(x: 0, y: 0)
 
     private let profileImageRadius: CGFloat = 100
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .white
-        constraints()
-    }
-
-    required init?(coder aDecoder: NSCoder)
-    {
-        fatalError("init(coder:) has not been implemented")
-    }
 
     private lazy var blurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
@@ -86,19 +77,14 @@ final class ProfileHeaderView: UIView {
         return label
     }()
 
-    private let showStatusButton: UIButton = {
+    private let showStatusButton: CustomButton = {
 
-        let button = UIButton()
-        button.setTitle("Set status", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(.white, for: .normal)
+        let button = CustomButton(title: "Set status", titleColor: .white, backgroundColor: .systemBlue)
         button.layer.cornerRadius = 4
         button.layer.shadowRadius = 4
         button.layer.shadowOpacity = 0.7
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
 
         return button
     }()
@@ -125,6 +111,22 @@ final class ProfileHeaderView: UIView {
 
         return textField
     }()
+
+    //MARK: - LifeCicle
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .white
+        layout()
+        taps()
+    }
+
+    required init?(coder aDecoder: NSCoder)
+    {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    //MARK: - Metods
 
     @objc func showAvatar() {
         guard profileImage.image != nil else {return}
@@ -174,9 +176,12 @@ final class ProfileHeaderView: UIView {
         })
     }
 
-    @objc func buttonPressed() {
-        statusLabel.text = statusText
-        self.endEditing(true)
+    func taps() {
+        showStatusButton.tapAction =  { [weak self] in
+            self?.statusLabel.text = self?.statusText
+            self?.endEditing(true)
+        }
+
     }
 
     @objc func statusTextChanged(_ textField: UITextField) {
@@ -192,7 +197,7 @@ final class ProfileHeaderView: UIView {
         statusLabel.text = user.status
     }
 
-    private func constraints() {
+    private func layout() {
         let spaseInterval: CGFloat = 16
 
         [nameLabel, statusLabel, showStatusButton, statusSetTextField, blurEffectView, profileImage, xmarkButton].forEach { self.addSubview($0) }
