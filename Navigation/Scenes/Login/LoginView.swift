@@ -1,15 +1,22 @@
 //
-//  LogInViewController.swift
+//  LoginView.swift
 //  Navigation
 //
-//  Created by 1234 on 29.03.2022.
+//  Created by 1234 on 20.06.2022.
 //
 
 import UIKit
+import SnapKit
 
-class LogInViewController: UIViewController {
+protocol LoginViewDelegate: AnyObject {
+    func didTapLogInButton()
+}
 
-    var delegate: LoginViewControllerDelegate?
+class LoginView: UIView {
+
+    //MARK: - Properties
+
+    weak var delegate: LoginViewDelegate?
     private let nc = NotificationCenter.default
 
     private let scrollView: UIScrollView = {
@@ -33,10 +40,9 @@ class LogInViewController: UIViewController {
         let image = UIImageView()
         image.image = UIImage(named: "logo.png")
         image.translatesAutoresizingMaskIntoConstraints = false
-        
+
         return image
     }()
-    private let color = UIColor(red: CGFloat(48) / 255.0, green: CGFloat(85) / 255.0, blue: CGFloat(15) / 255.0, alpha: 1.0)
 
     private lazy var loginTextField: UITextField = {
 
@@ -86,37 +92,48 @@ class LogInViewController: UIViewController {
         return textField
     }()
 
-    private let logInButton: UIButton = {
+    private let logInButton: CustomButton = {
 
-        let button = UIButton()
-        button.setTitle("Log In", for: .normal)
+        let button = CustomButton(title: "Log In", titleColor: .white, backgroundColor: .blue)
         button.setBackgroundImage(UIImage(named: "blue_pixel.png")!.alpha(1), for: .normal)
         button.setBackgroundImage(UIImage(named: "blue_pixel.png")!.alpha(0.8), for: .selected)
         button.setBackgroundImage(UIImage(named: "blue_pixel.png")!.alpha(0.8), for: .highlighted)
         button.setBackgroundImage(UIImage(named: "blue_pixel.png")!.alpha(0.8), for: .disabled)
-        button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
+
         return button
     }()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
+    //MARK: - LifeCicle
+
+    init(delegate: LoginViewDelegate?) {
+        super.init(frame: CGRect.zero)
+        self.delegate = delegate
+        backgroundColor = .white
+        addObserver()
         layout()
+        taps()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    required init?(coder aDecoder: NSCoder)
+    {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+        removeObserver()
+    }
+
+    //MARK: - Metods
+
+    func addObserver() {
         nc.addObserver(self, selector: #selector(kdbShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.addObserver(self, selector: #selector(kdbHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+
+    func removeObserver() {
         nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -133,70 +150,75 @@ class LogInViewController: UIViewController {
         scrollView.verticalScrollIndicatorInsets = .zero
     }
 
-    @objc func buttonPressed() {
-        guard let authorizationSuccessful = delegate?.check(login: loginTextField.text!, password: passwordTextField.text!) else {
-            print("File:" + #file, "\nFunction: " + #function + "\nError message: Не удалось выполнить проверку пары Логин/Пароль\n")
-            return
+    private func taps() {
+        logInButton.tapAction = { [weak self] in
+            self?.delegate?.didTapLogInButton()
         }
-        #if DEBUG
-            let userService = TestUserService()
-        #else
-            let userService = CurrentUserService()
-        #endif
-        let vc = ProfileViewController(userService: userService, userName: loginTextField.text ?? "")
-        if authorizationSuccessful {
-            navigationController?.pushViewController(vc, animated: true)
-        } else {
-            print("File:" + #file, "\nFunction: " + #function + "\nError message: Пара Логин/Пароль не найдена\n")
-        }
+    }
+
+    func getLogin() -> String{
+        loginTextField.text!
+    }
+
+    func getPassword() -> String{
+        passwordTextField.text!
     }
 
     private func layout() {
+        [logoImage,
+         loginTextField,
+         passwordTextField,
+         logInButton
+        ].forEach { contentView.addSubview($0)}
 
-        [logoImage, loginTextField, passwordTextField, logInButton].forEach { contentView.addSubview($0) }
         scrollView.addSubview(contentView)
-        view.addSubview(scrollView)
+        addSubview(scrollView)
 
-        NSLayoutConstraint.activate([
-            logoImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
-            logoImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            logoImage.heightAnchor.constraint(equalToConstant: 100),
-            logoImage.widthAnchor.constraint(equalToConstant: 100),
+        logoImage.snp.makeConstraints{
+            $0.top.equalTo(contentView.snp.top).offset(120)
+            $0.centerX.equalTo(contentView.snp.centerX)
+            $0.height.equalTo(100)
+            $0.width.equalTo(100)
+        }
 
-            loginTextField.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 120),
-            loginTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            loginTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            loginTextField.heightAnchor.constraint(equalToConstant: 50),
+        loginTextField.snp.makeConstraints{
+            $0.top.equalTo(logoImage.snp.bottom).offset(120)
+            $0.leading.equalTo(contentView.snp.leading).offset(16)
+            $0.trailing.equalTo(contentView.snp.trailing).offset(-16)
+            $0.height.equalTo(50)
+        }
 
-            passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor),
-            passwordTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            passwordTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+        passwordTextField.snp.makeConstraints{
+            $0.top.equalTo(loginTextField.snp.bottom)
+            $0.leading.equalTo(contentView.snp.leading).offset(16)
+            $0.trailing.equalTo(contentView.snp.trailing).offset(-16)
+            $0.height.equalTo(50)
+        }
 
-            logInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
-            logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            logInButton.heightAnchor.constraint(equalToConstant: 50),
-            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+        logInButton.snp.makeConstraints{
+            $0.top.equalTo(passwordTextField.snp.bottom).offset(16)
+            $0.leading.equalTo(contentView.snp.leading).offset(16)
+            $0.trailing.equalTo(contentView.snp.trailing).offset(-16)
+            $0.height.equalTo(50)
+            $0.bottom.equalTo(contentView.snp.bottom)
+        }
 
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+        contentView.snp.makeConstraints{
+            $0.edges.width.equalTo(scrollView)
+        }
+
+        scrollView.snp.makeConstraints{
+            $0.edges.equalTo(safeAreaLayoutGuide)
+        }
     }
-
 }
 
-extension LogInViewController: UITextFieldDelegate {
+//MARK: - UITextFieldDelegate
+
+extension LoginView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        view.endEditing(true)
+        endEditing(true)
         return true
     }
 }
+

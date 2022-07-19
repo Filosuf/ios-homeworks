@@ -11,6 +11,8 @@ import StorageService
 
 class ProfileViewController: UIViewController {
 
+    //MARK: - Properties
+    
     let myPosts = Post.makeArrayPosts()
     private let userService: UserService
     private let userName: String
@@ -27,6 +29,8 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
 
+    //MARK: - LifeCicle
+    
     init(userService: UserService, userName: String) {
         self.userService = userService
         self.userName = userName
