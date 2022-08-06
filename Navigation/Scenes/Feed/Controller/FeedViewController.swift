@@ -15,10 +15,12 @@ class FeedViewController: UIViewController {
     let model: FeedModel
     var post = Post(title: "Заголовок поста")
     lazy var feedView = FeedView(delegate: self)
+    private var coordinator: FeedFlowCoordinator?
 
     //MARK: - LifeCicle
-    init(model: FeedModel) {
+    init(model: FeedModel, coordinator: FeedFlowCoordinator) {
         self.model = model
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -34,7 +36,6 @@ class FeedViewController: UIViewController {
     }
 
     //MARK: - Metods
-
     @objc private func notificationAction(_ notification: Notification) {
         guard let result = notification.object as? Bool else {
             let object = notification.object as Any
@@ -56,13 +57,10 @@ class FeedViewController: UIViewController {
 }
 
 //MARK: - FeedViewDelegate
-
 extension FeedViewController: FeedViewDelegate {
 
    func didTapPostButton() {
-        let vc = PostViewController()
-        vc.title = post.title
-        navigationController?.pushViewController(vc, animated: true)
+        coordinator?.showPost(title: post.title)
     }
 
     func check(word: String) {

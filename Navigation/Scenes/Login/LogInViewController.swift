@@ -13,15 +13,23 @@ protocol LoginViewControllerDelegate: AnyObject {
     func check(login: String, password: String) -> Bool
 }
 
-class LogInViewController: UIViewController {
+final class LogInViewController: UIViewController {
 
     //MARK: - Properties
-    
-    lazy var loginView = LoginView(delegate: self)
-    var delegate: LoginViewControllerDelegate?
+    private var viewModel: LoginViewModel
+    private lazy var loginView = LoginView(delegate: self)
+
+    //MARK: - Initialiser
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     //MARK: - LifeCicle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -29,7 +37,6 @@ class LogInViewController: UIViewController {
     }
 
     //MARK: - Metods
-    
     private func layout() {
         view.addSubview(loginView)
 
@@ -41,26 +48,13 @@ class LogInViewController: UIViewController {
 }
 
 //MARK: - LoginViewDelegate
-
 extension LogInViewController: LoginViewDelegate {
 
     func didTapLogInButton() {
         let login = loginView.getLogin()
-        guard let authorizationSuccessful = delegate?.check(login: login, password: loginView.getPassword()) else {
-                   print("File:" + #file, "\nFunction: " + #function + "\nError message: Не удалось выполнить проверку пары Логин/Пароль\n")
-                   return
-               }
-               #if DEBUG
-                   let userService = TestUserService()
-               #else
-                   let userService = CurrentUserService()
-               #endif
-               let vc = ProfileViewController(userService: userService, userName: login)
-               if authorizationSuccessful {
-                   navigationController?.pushViewController(vc, animated: true)
-               } else {
-                   print("File:" + #file, "\nFunction: " + #function + "\nError message: Пара Логин/Пароль не найдена\n")
-               }
+        let password = loginView.getPassword()
+
+        viewModel.login(login: login, password: password)
     }
 
 
