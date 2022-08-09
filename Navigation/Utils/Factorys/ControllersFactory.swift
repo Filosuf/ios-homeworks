@@ -34,4 +34,8 @@ final class ControllersFactory {
         return profileVC
     }
 
+    func makePhotoViewController() -> PhotosViewController {
+        let photoVC = PhotosViewController()
+        return photoVC
+    }
 }

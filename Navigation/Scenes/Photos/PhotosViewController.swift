@@ -11,8 +11,11 @@ import iOSIntPackage
 class PhotosViewController: UIViewController {
 
     var imagePublisherFacade = ImagePublisherFacade()
-    private var imagesArray = [UIImage]()
-    
+    private var imagesDelayArray = [UIImage]()
+    private let imageSourceArray = Photo.makeArrayImages()
+    private var imagesFilterArray = [CGImage?]()
+
+
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
 
@@ -30,13 +33,27 @@ class PhotosViewController: UIViewController {
         title = "Photo Gallery"
         view.backgroundColor = .white
         layout()
+        // Загрука изображений в массив изображений 'imagesDelayArray' с задержкой
         imagePublisherFacade.subscribe(self)
         imagePublisherFacade.addImagesWithTimer(time: 1, repeat: 20, userImages: Photo.makeArrayImages())
+        // Проверка влияний приоритета потока при обработке изображений IOSINT HW-8
+        let qos: QualityOfService = .default
+        let startTime = Date()
+        ImageProcessor().processImagesOnThread(sourceImages: Photo.makeArrayImages(), filter: .colorInvert, qos: qos) {
+            self.imagesFilterArray = $0
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+            print("Изображения были обработаны в течение \(Date().timeIntervalSince(startTime)) секунд")
+        }
+
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         imagePublisherFacade.removeSubscription(for: self)
     }
+
+
 
     private func layout() {
         view.addSubview(collectionView)
@@ -55,12 +72,21 @@ class PhotosViewController: UIViewController {
 
 extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        imagesArray.count
+        imagesFilterArray.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.identifier, for: indexPath) as! PhotosCollectionViewCell
-        cell.setupCell(photo: imagesArray[indexPath.row])
+//        cell.setupCell(photo: imagesDelayArray[indexPath.row])
+        var image = UIImage()
+        let notAvailableImage = UIImage(systemName: "exclamationmark.icloud.fill")!
+        if let cgImage =  imagesFilterArray[indexPath.row] {
+            image =  UIImage(cgImage: cgImage)
+        } else {
+            image = notAvailableImage
+        }
+//        image = imageSourceArray[indexPath.row]
+        cell.setupCell(photo: image)
         return cell
     }
 }
@@ -92,7 +118,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 extension PhotosViewController: ImageLibrarySubscriber {
 
     func receive(images: [UIImage]) {
-        imagesArray = images
+        imagesDelayArray = images
         collectionView.reloadData()
     }
 
