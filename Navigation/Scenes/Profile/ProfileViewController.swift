@@ -9,11 +9,12 @@
 import UIKit
 import StorageService
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
 
     //MARK: - Properties
     
     let myPosts = Post.makeArrayPosts()
+    private weak var coordinator: ProfileFlowCoordinator?
     private let userService: UserService
     private let userName: String
 
@@ -31,9 +32,10 @@ class ProfileViewController: UIViewController {
 
     //MARK: - LifeCicle
     
-    init(userService: UserService, userName: String) {
+    init(userService: UserService, userName: String, coordinator: ProfileFlowCoordinator) {
         self.userService = userService
         self.userName = userName
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -122,8 +124,7 @@ extension ProfileViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
-            let vc = PhotosViewController()
-            navigationController?.pushViewController(vc, animated: true)
+            coordinator?.showPhotos()
         }
     }
 
