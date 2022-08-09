@@ -10,6 +10,7 @@ import SnapKit
 
 protocol LoginViewDelegate: AnyObject {
     func didTapLogInButton()
+    func didTapCrackPasswordButton()
 }
 
 class LoginView: UIView {
@@ -105,6 +106,26 @@ class LoginView: UIView {
         return button
     }()
 
+    private let crackPasswordButton: CustomButton = {
+
+        let button = CustomButton(title: "Подобрать пароль", titleColor: .white, backgroundColor: .blue)
+        button.setBackgroundImage(UIImage(named: "blue_pixel.png")!.alpha(1), for: .normal)
+        button.setBackgroundImage(UIImage(named: "blue_pixel.png")!.alpha(0.8), for: .selected)
+        button.setBackgroundImage(UIImage(named: "blue_pixel.png")!.alpha(0.8), for: .highlighted)
+        button.setBackgroundImage(UIImage(named: "blue_pixel.png")!.alpha(0.8), for: .disabled)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+
+        return button
+    }()
+
+    private let spinnerView: UIActivityIndicatorView = {
+        let activityView: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
+            activityView.hidesWhenStopped = true
+            activityView.translatesAutoresizingMaskIntoConstraints = false
+            return activityView
+        }()
+
     //MARK: - LifeCicle
 
     init(delegate: LoginViewDelegate?) {
@@ -154,6 +175,11 @@ class LoginView: UIView {
         logInButton.tapAction = { [weak self] in
             self?.delegate?.didTapLogInButton()
         }
+        crackPasswordButton.tapAction = { [weak self] in
+            guard let self = self else { return }
+            self.waitingSpinnerEnable(true)
+            self.delegate?.didTapCrackPasswordButton()
+        }
     }
 
     func getLogin() -> String{
@@ -164,11 +190,26 @@ class LoginView: UIView {
         passwordTextField.text!
     }
 
+    func setPassword(password: String, isSecure: Bool) {
+        passwordTextField.isSecureTextEntry = isSecure
+        passwordTextField.text = password
+    }
+
+    func waitingSpinnerEnable(_ active: Bool) {
+        if active {
+            spinnerView.startAnimating()
+        } else {
+            spinnerView.stopAnimating()
+        }
+    }
+
     private func layout() {
         [logoImage,
          loginTextField,
          passwordTextField,
-         logInButton
+         logInButton,
+         crackPasswordButton,
+         spinnerView
         ].forEach { contentView.addSubview($0)}
 
         scrollView.addSubview(contentView)
@@ -200,6 +241,18 @@ class LoginView: UIView {
             $0.leading.equalTo(contentView.snp.leading).offset(16)
             $0.trailing.equalTo(contentView.snp.trailing).offset(-16)
             $0.height.equalTo(50)
+        }
+
+        crackPasswordButton.snp.makeConstraints{
+            $0.top.equalTo(logInButton.snp.bottom).offset(16)
+            $0.leading.equalTo(contentView.snp.leading).offset(16)
+            $0.trailing.equalTo(contentView.snp.trailing).offset(-16)
+            $0.height.equalTo(50)
+        }
+
+        spinnerView.snp.makeConstraints{
+            $0.top.equalTo(crackPasswordButton.snp.bottom).offset(16)
+            $0.centerX.equalTo(crackPasswordButton.snp.centerX)
             $0.bottom.equalTo(contentView.snp.bottom)
         }
 
