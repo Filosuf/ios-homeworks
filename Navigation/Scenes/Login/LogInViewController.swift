@@ -15,11 +15,11 @@ protocol LoginViewControllerDelegate: AnyObject {
 
 final class LogInViewController: UIViewController {
 
-    //MARK: - Properties
+    // MARK: - Properties
     private var viewModel: LoginViewModel
     private lazy var loginView = LoginView(delegate: self)
 
-    //MARK: - Initialiser
+    // MARK: - Initialiser
     init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -29,14 +29,14 @@ final class LogInViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    //MARK: - LifeCicle
+    // MARK: - LifeCicle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         layout()
     }
 
-    //MARK: - Metods
+    // MARK: - Metods
     private func layout() {
         view.addSubview(loginView)
 
@@ -69,7 +69,7 @@ extension LogInViewController: LoginViewDelegate {
     }
 }
 
-//MARK: - Generate and Crack Password
+// MARK: - Generate and Crack Password
 extension LogInViewController {
 
     private func generatePassword(length: Int) -> String {
@@ -95,7 +95,7 @@ extension LogInViewController {
             // Your stuff here
         }
 
-        print(password)
+//        print(password)
     }
 
 }
