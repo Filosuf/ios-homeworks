@@ -10,7 +10,7 @@ import SnapKit
 
 protocol LoginViewControllerDelegate: AnyObject {
 
-    func check(login: String, password: String) -> Bool
+    func check(login: String, password: String) throws -> Bool
 }
 
 final class LogInViewController: UIViewController {

@@ -39,7 +39,7 @@ class PhotosViewController: UIViewController {
         // Проверка влияний приоритета потока при обработке изображений IOSINT HW-8
         let qos: QualityOfService = .default
         let startTime = Date()
-        ImageProcessor().processImagesOnThread(sourceImages: Photo.makeArrayImages(), filter: .colorInvert, qos: qos) {
+        ImageProcessor().processImagesOnThread(sourceImages: Photo.makeArrayImages(), filter: .fade, qos: qos) {
             self.imagesFilterArray = $0
             DispatchQueue.main.async {
                 self.collectionView.reloadData()

@@ -126,6 +126,17 @@ class LoginView: UIView {
             return activityView
         }()
 
+    private lazy var debugHintLabel: UILabel = {
+
+        let label = UILabel()
+        label.text = "login: login \npassword: qwerty"
+        label.numberOfLines = 2
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+
+        return label
+    }()
+
     //MARK: - LifeCicle
 
     init(delegate: LoginViewDelegate?) {
@@ -209,7 +220,8 @@ class LoginView: UIView {
          passwordTextField,
          logInButton,
          crackPasswordButton,
-         spinnerView
+         spinnerView,
+         debugHintLabel
         ].forEach { contentView.addSubview($0)}
 
         scrollView.addSubview(contentView)
@@ -254,6 +266,11 @@ class LoginView: UIView {
             $0.top.equalTo(crackPasswordButton.snp.bottom).offset(16)
             $0.centerX.equalTo(crackPasswordButton.snp.centerX)
             $0.bottom.equalTo(contentView.snp.bottom)
+        }
+
+        debugHintLabel.snp.makeConstraints{
+            $0.centerX.equalTo(self.snp.centerX)
+            $0.bottom.equalTo(loginTextField.snp.top).offset(-30)
         }
 
         contentView.snp.makeConstraints{

@@ -29,6 +29,23 @@ final class ProfileFlowCoordinator {
         navCon.pushViewController(vc, animated: true)
     }
 
+    func showAlert(title: String, message: String, buttonText: String = "Ok") {
+        // создаём объекты всплывающего окна
+        let alert = UIAlertController(
+            title: title, // заголовок всплывающего окна
+            message: message, // текст во всплывающем окне
+            preferredStyle: .alert) // preferredStyle может быть .alert или .actionSheet
+
+        // создаём для него кнопки с действиями
+        let action = UIAlertAction(title: buttonText, style: .default) 
+
+        // добавляем в алерт кнопки
+        alert.addAction(action)
+
+        // показываем всплывающее окно
+        navCon.present(alert, animated: true, completion: nil)
+    }
+
 //    func pop(navCon: UINavigationController?) {
 //        navCon?.popViewController(animated: true)
 //    }
