@@ -16,13 +16,6 @@ class FeedModel {
         }
     }
 
-//    private let notificationCenter: NotificationCenter
-//
-//    init(notificationCenter: NotificationCenter = .default) {
-//        self.notificationCenter = notificationCenter
-//    }
-
-
     func check(word: String) {
         if password == word {
             isValidWord = true

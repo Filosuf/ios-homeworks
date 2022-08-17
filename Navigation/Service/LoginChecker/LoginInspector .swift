@@ -7,10 +7,33 @@
 
 import Foundation
 
+enum LoginError: Error {
+    case loginIsEmpty
+    case loginIsIncorrect
+    case passwordIsEmpty
+    case passwordIsIncorrect
+    case isInvalid
+}
+
 class LoginInspector: LoginViewControllerDelegate {
 
-    func check(login: String, password: String) -> Bool {
-        return Checker.shared.authorization(login: login, password: password)
+    func check(login: String, password: String) throws -> Bool {
+
+        let pairIsValid = Checker.shared.authorization(login: login, password: password)
+
+        switch (login, password) {
+        case ("", _):
+            throw LoginError.loginIsEmpty
+        case (_, ""):
+            throw LoginError.passwordIsEmpty
+        default:
+            break
+        }
+        if pairIsValid == false {
+            throw LoginError.isInvalid
+        }
+
+        return pairIsValid
     }
 
     

@@ -30,6 +30,10 @@
 		7C2A37BA2852320600BAD47A /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7C2A37A42852320600BAD47A /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7C2A37C22852338F00BAD47A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC503A427D5298D00BAD3C1 /* Post.swift */; };
 		7C4E6738289E8D1400716248 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4E6737289E8D1400716248 /* LoginViewModel.swift */; };
+		7C4E673A28A259E200716248 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4E673928A259E200716248 /* String+Extension.swift */; };
+		7C6B1D1028ACCA6100399CE0 /* sample3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7C6B1D0F28ACCA6100399CE0 /* sample3.m4a */; };
+		7C70C39628AA6F75004C5600 /* VoiceRecController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C70C39528AA6F75004C5600 /* VoiceRecController.swift */; };
+		7C70C39828AA7007004C5600 /* VoiceRecView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C70C39728AA7007004C5600 /* VoiceRecView.swift */; };
 		7CC5039D27D4C1DA00BAD3C1 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC5039C27D4C1DA00BAD3C1 /* FeedViewController.swift */; };
 		7CC5039F27D4C23C00BAD3C1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC5039E27D4C23C00BAD3C1 /* ProfileViewController.swift */; };
 		7CC503A127D520D900BAD3C1 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC503A027D520D900BAD3C1 /* PostViewController.swift */; };
@@ -126,6 +130,10 @@
 		7C2A37AD2852320600BAD47A /* StorageServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StorageServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C2A37B42852320600BAD47A /* StorageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceTests.swift; sourceTree = "<group>"; };
 		7C4E6737289E8D1400716248 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		7C4E673928A259E200716248 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		7C6B1D0F28ACCA6100399CE0 /* sample3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample3.m4a; sourceTree = "<group>"; };
+		7C70C39528AA6F75004C5600 /* VoiceRecController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecController.swift; sourceTree = "<group>"; };
+		7C70C39728AA7007004C5600 /* VoiceRecView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecView.swift; sourceTree = "<group>"; };
 		7CC5039C27D4C1DA00BAD3C1 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		7CC5039E27D4C23C00BAD3C1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7CC503A027D520D900BAD3C1 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -277,6 +285,15 @@
 			path = StorageServiceTests;
 			sourceTree = "<group>";
 		};
+		7C70C39428AA6F0F004C5600 /* VoiceRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				7C70C39528AA6F75004C5600 /* VoiceRecController.swift */,
+				7C70C39728AA7007004C5600 /* VoiceRecView.swift */,
+			);
+			path = VoiceRecorder;
+			sourceTree = "<group>";
+		};
 		7CC5039927D2A2B600BAD3C1 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,6 +310,7 @@
 				7C189E2127C824E500E683BF /* LaunchScreen.storyboard */,
 				7C189E2427C824E500E683BF /* Info.plist */,
 				7CEEECEC286205CE00C730E9 /* Photo.swift */,
+				7C6B1D0F28ACCA6100399CE0 /* sample3.m4a */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -401,6 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				7CFD3C7927FFEBE4000D4F8C /* UITableViewCell+Extension.swift */,
+				7C4E673928A259E200716248 /* String+Extension.swift */,
 				7C1E843B27F88B9800784897 /* UIView+Extension.swift */,
 				7C1E843727F3B2ED00784897 /* UIImage+Alpha.swift */,
 				7CEEECF02863567900C730E9 /* Notification.Name + Extension.swift */,
@@ -415,6 +434,7 @@
 				7CEEECD4285CCCC500C730E9 /* Feed */,
 				7CEEECDD2861E2F000C730E9 /* Post */,
 				7CEEECDE2861E32900C730E9 /* Info */,
+				7C70C39428AA6F0F004C5600 /* VoiceRecorder */,
 				7CEEECC12858B09D00C730E9 /* Login */,
 				7CC503ED27DC694300BAD3C1 /* Profile */,
 				7CEEECDC2861E26000C730E9 /* Photos */,
@@ -588,6 +608,7 @@
 			files = (
 				7C189E2327C824E500E683BF /* LaunchScreen.storyboard in Resources */,
 				7C189E2027C824E500E683BF /* Assets.xcassets in Resources */,
+				7C6B1D1028ACCA6100399CE0 /* sample3.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -702,6 +723,7 @@
 				7C1E843E27FCCE3700784897 /* PhotosTableViewCell.swift in Sources */,
 				7CEEECCB2859B5E600C730E9 /* MyLoginFactory.swift in Sources */,
 				7C1C68C7285683A800F4B9B8 /* CurrentUserService.swift in Sources */,
+				7C70C39628AA6F75004C5600 /* VoiceRecController.swift in Sources */,
 				7CEEECC02858632000C730E9 /* TestUserService.swift in Sources */,
 				7CEEED18288930AC00C730E9 /* FeedFlowCoordinator.swift in Sources */,
 				7CEEECD3285CA48600C730E9 /* CustomButton.swift in Sources */,
@@ -720,6 +742,8 @@
 				7CEEECC72858C17B00C730E9 /* LoginInspector .swift in Sources */,
 				7CFD3C7827FF6DED000D4F8C /* PhotosCollectionViewCell.swift in Sources */,
 				7C1E843C27F88B9800784897 /* UIView+Extension.swift in Sources */,
+				7C4E673A28A259E200716248 /* String+Extension.swift in Sources */,
+				7C70C39828AA7007004C5600 /* VoiceRecView.swift in Sources */,
 				7CEEED1A288C2BE700C730E9 /* ControllersFactory.swift in Sources */,
 				7CEEECDA2860999500C730E9 /* LoginView.swift in Sources */,
 				7CC503A327D524EA00BAD3C1 /* InfoViewController.swift in Sources */,

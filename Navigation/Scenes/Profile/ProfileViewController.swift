@@ -52,7 +52,7 @@ final class ProfileViewController: UIViewController {
             view.backgroundColor = .white
         #endif
         setTableView()
-        profileHeaderView.setupView(user: userService.getUser(userName: userName))
+        loadUser(userName: userName)
         layout()
     }
 
@@ -69,6 +69,24 @@ final class ProfileViewController: UIViewController {
     func setTableView() {
         ProfileViewController.tableView.dataSource = self
         ProfileViewController.tableView.delegate = self
+    }
+
+    private func loadUser(userName: String) {
+        userService.getUser(userName: userName) { result in
+            switch result {
+            case .success(let user):
+                profileHeaderView.setupView(user: user)
+            case .failure(let error):
+                hundle(error: error)
+            }
+        }
+    }
+
+    private func hundle(error: UserGetError) {
+        switch error{
+        case .notFound: fatalError()
+        case .unowned: print("File:" + #file, "\nFunction: " + #function + "\nUserGetError.unowned\n")
+        }
     }
 
     private func layout() {

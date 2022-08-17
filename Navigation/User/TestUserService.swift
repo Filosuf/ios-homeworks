@@ -12,8 +12,12 @@ final class TestUserService: UserService {
 
     let user = User(name: "login", avatar: UIImage(named: "avatarDog.jpg")!, status: "Я счастлив(Debug)")
     
-    func getUser(userName: String) -> User? {
-        user.name == userName ? user : nil
+    func getUser(userName: String, completion: (Result<User, UserGetError>) -> Void) {
+        if user.name == userName {
+            completion(.success(user))
+        } else {
+            completion(.failure(UserGetError.notFound))
+        }
     }
 
 }

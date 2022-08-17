@@ -24,5 +24,10 @@ final class FeedFlowCoordinator {
         vc.title = title
         navCon.pushViewController(vc, animated: true)
     }
-    
+
+    func showVoiceRecorder() {
+        let vc = VoiceRecController()
+        vc.title = "Voice recording"
+        navCon.pushViewController(vc, animated: true)
+    }
 }

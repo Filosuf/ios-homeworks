@@ -11,10 +11,12 @@ import SnapKit
 protocol FeedViewDelegate: AnyObject {
     func didTapPostButton()
     func check(word: String)
+    func didTapVoiceRecButton()
 }
 
 final class FeedView: UIView {
 
+    // MARK: - Properties
     weak var delegate: FeedViewDelegate?
 
     private let postButtonFirst = CustomButton(title: "Post #1", backgroundColor: .systemGray)
@@ -23,6 +25,9 @@ final class FeedView: UIView {
     private let notificationButton = CustomButton(title: "Notification", backgroundColor: #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1))
 
     private let textField = CustomTextField(placeholder: "Good work", backgroundColor: .systemGray5)
+
+    private var updateCounter = 0 // Счётчик одновлений контента на экране по таймеру
+    private var countdownTime = 5 // Периодичность срабатывания таймера
 
     private let resultLabel: UILabel = {
 
@@ -45,11 +50,38 @@ final class FeedView: UIView {
         return stackView
     }()
 
+    private lazy var countdownTimeLabel: UILabel = {
+
+        let label = UILabel()
+        label.text = "До обновления экрана осталось \(countdownTime) сек."
+        label.textAlignment = .center
+        label.textColor = .white
+        label.backgroundColor = .black
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+//
+        return label
+    }()
+
+    private lazy var updateCounterLabel: UILabel = {
+
+        let label = UILabel()
+        label.text = "Данные на экране обновлены \(updateCounter) раз(а)"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+
+        return label
+    }()
+
+    private let voiceRecButton = CustomButton(title: "Диктофон", backgroundColor: .systemGray)
+
+    // MARK: - Initialiser
     init(delegate: FeedViewDelegate?) {
         super.init(frame: CGRect.zero)
         self.delegate = delegate
         backgroundColor = .white
         layout()
+        makeTimer()
         taps()
     }
 
@@ -58,8 +90,7 @@ final class FeedView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    //MARK: - Metods
-
+    // MARK: - Metods
     private func taps() {
         postButtonFirst.tapAction = { [weak self] in
             self?.delegate?.didTapPostButton()
@@ -69,6 +100,25 @@ final class FeedView: UIView {
         }
         notificationButton.tapAction = { [weak self] in
             self?.delegate?.check(word: self?.textField.text ?? "")
+        }
+        voiceRecButton.tapAction = { [weak self] in
+            self?.delegate?.didTapVoiceRecButton()
+        }
+    }
+
+    private func makeTimer() {
+        var countdown = countdownTime
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {timer in
+            countdown -= 1
+            self.countdownTimeLabel.text = "До обновления экрана осталось \(countdown) сек."
+            if countdown == 0 {
+                countdown = self.countdownTime
+                self.updateCounter += 1
+                self.updateCounterLabel.text = "Данные на экране обновлены \(self.updateCounter) раз(а)"
+            }
+            if self.updateCounter == 3 {
+                timer.invalidate()
+            }
         }
     }
 
@@ -90,8 +140,21 @@ final class FeedView: UIView {
         [buttonVerticalStackView,
          textField,
          notificationButton,
-         resultLabel
+         resultLabel,
+         countdownTimeLabel,
+         updateCounterLabel,
+         voiceRecButton
         ].forEach { addSubview($0)}
+
+        countdownTimeLabel.snp.makeConstraints{
+            $0.top.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+            $0.height.equalTo(30)
+        }
+
+        updateCounterLabel.snp.makeConstraints{
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(countdownTimeLabel.snp.bottom).offset(30)
+        }
 
         buttonVerticalStackView.snp.makeConstraints{
             $0.center.equalToSuperview()
@@ -111,6 +174,11 @@ final class FeedView: UIView {
 
         resultLabel.snp.makeConstraints{
             $0.top.equalTo(notificationButton.snp.bottom).offset(10)
+            $0.leading.trailing.equalTo(textField)
+        }
+
+        voiceRecButton.snp.makeConstraints{
+            $0.top.equalTo(resultLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalTo(textField)
         }
 
