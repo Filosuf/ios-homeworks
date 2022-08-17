@@ -18,11 +18,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         let mainCoordinator: MainCoordinator = MainCoordinatorImp()
         window?.rootViewController = mainCoordinator.startApplication()
-//        window?.rootViewController = MainTabBarController(loginFactory: loginFactory)
-//        window?.rootViewController = ProfileViewController(userService: TestUserService(), userName: "login")
-//        window?.rootViewController = PhotosViewController()
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light
+        let appConfiguration = AppConfiguration.allCases.randomElement()!
+        NetworkService.request(for: appConfiguration)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
