@@ -32,6 +32,7 @@
 		7C4E6738289E8D1400716248 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4E6737289E8D1400716248 /* LoginViewModel.swift */; };
 		7C4E673A28A259E200716248 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4E673928A259E200716248 /* String+Extension.swift */; };
 		7C6B1D1028ACCA6100399CE0 /* sample3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7C6B1D0F28ACCA6100399CE0 /* sample3.m4a */; };
+		7C6B1D1228AD2EA400399CE0 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B1D1128AD2EA400399CE0 /* NetworkService.swift */; };
 		7C70C39628AA6F75004C5600 /* VoiceRecController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C70C39528AA6F75004C5600 /* VoiceRecController.swift */; };
 		7C70C39828AA7007004C5600 /* VoiceRecView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C70C39728AA7007004C5600 /* VoiceRecView.swift */; };
 		7CC5039D27D4C1DA00BAD3C1 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC5039C27D4C1DA00BAD3C1 /* FeedViewController.swift */; };
@@ -132,6 +133,7 @@
 		7C4E6737289E8D1400716248 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		7C4E673928A259E200716248 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		7C6B1D0F28ACCA6100399CE0 /* sample3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample3.m4a; sourceTree = "<group>"; };
+		7C6B1D1128AD2EA400399CE0 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		7C70C39528AA6F75004C5600 /* VoiceRecController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecController.swift; sourceTree = "<group>"; };
 		7C70C39728AA7007004C5600 /* VoiceRecView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecView.swift; sourceTree = "<group>"; };
 		7CC5039C27D4C1DA00BAD3C1 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 			isa = PBXGroup;
 			children = (
 				7CEEECE52861E6E600C730E9 /* LoginChecker */,
+				7C6B1D1128AD2EA400399CE0 /* NetworkService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -729,6 +732,7 @@
 				7CEEECD3285CA48600C730E9 /* CustomButton.swift in Sources */,
 				7CFD3C7427FEF829000D4F8C /* PhotosViewController.swift in Sources */,
 				7CEEECEF28620AC700C730E9 /* FeedModel.swift in Sources */,
+				7C6B1D1228AD2EA400399CE0 /* NetworkService.swift in Sources */,
 				7CC503A127D520D900BAD3C1 /* PostViewController.swift in Sources */,
 				7C189E1B27C824E200E683BF /* MainTabBarController.swift in Sources */,
 				7C1E843A27F827AC00784897 /* PostTableViewCell.swift in Sources */,
