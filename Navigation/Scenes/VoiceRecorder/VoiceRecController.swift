@@ -153,13 +153,14 @@ extension VoiceRecController: AVAudioRecorderDelegate {
 }
 
 extension VoiceRecController: AVAudioPlayerDelegate {
-    func audioPlayerDidFinishPlaying() {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         playerStop()
     }
 
     private func prepareToPlay() {
         do {
             Player = try AVAudioPlayer(contentsOf: recordedFileUrl)
+            Player!.delegate = self
             Player!.prepareToPlay()
             print("Длительность записи \(Player!.duration)")
         }
