@@ -66,4 +66,8 @@ extension FeedViewController: FeedViewDelegate {
     func check(word: String) {
         model.check(word: word)
     }
+
+    func didTapVoiceRecButton() {
+        coordinator?.showVoiceRecorder()
+    }
 }

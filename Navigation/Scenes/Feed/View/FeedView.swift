@@ -11,6 +11,7 @@ import SnapKit
 protocol FeedViewDelegate: AnyObject {
     func didTapPostButton()
     func check(word: String)
+    func didTapVoiceRecButton()
 }
 
 final class FeedView: UIView {
@@ -72,6 +73,8 @@ final class FeedView: UIView {
         return label
     }()
 
+    private let voiceRecButton = CustomButton(title: "Диктофон", backgroundColor: .systemGray)
+
     // MARK: - Initialiser
     init(delegate: FeedViewDelegate?) {
         super.init(frame: CGRect.zero)
@@ -97,6 +100,9 @@ final class FeedView: UIView {
         }
         notificationButton.tapAction = { [weak self] in
             self?.delegate?.check(word: self?.textField.text ?? "")
+        }
+        voiceRecButton.tapAction = { [weak self] in
+            self?.delegate?.didTapVoiceRecButton()
         }
     }
 
@@ -136,7 +142,8 @@ final class FeedView: UIView {
          notificationButton,
          resultLabel,
          countdownTimeLabel,
-         updateCounterLabel
+         updateCounterLabel,
+         voiceRecButton
         ].forEach { addSubview($0)}
 
         countdownTimeLabel.snp.makeConstraints{
@@ -167,6 +174,11 @@ final class FeedView: UIView {
 
         resultLabel.snp.makeConstraints{
             $0.top.equalTo(notificationButton.snp.bottom).offset(10)
+            $0.leading.trailing.equalTo(textField)
+        }
+
+        voiceRecButton.snp.makeConstraints{
+            $0.top.equalTo(resultLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalTo(textField)
         }
 
