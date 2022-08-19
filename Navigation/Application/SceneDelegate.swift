@@ -17,11 +17,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let mainCoordinator: MainCoordinator = MainCoordinatorImp()
-        window?.rootViewController = mainCoordinator.startApplication()
+//        window?.rootViewController = mainCoordinator.startApplication()
+        window?.rootViewController = InfoViewController()
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light
-        let appConfiguration = AppConfiguration.allCases.randomElement()!
-        NetworkService.request(for: appConfiguration)
+//        let appConfiguration = AppConfiguration.allCases.randomElement()!
+//        NetworkService.request(for: appConfiguration)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
