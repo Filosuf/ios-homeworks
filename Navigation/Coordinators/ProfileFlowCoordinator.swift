@@ -46,7 +46,7 @@ final class ProfileFlowCoordinator {
         navCon.present(alert, animated: true, completion: nil)
     }
 
-//    func pop(navCon: UINavigationController?) {
-//        navCon?.popViewController(animated: true)
-//    }
+    func pop() {
+        navCon.popViewController(animated: true)
+    }
 }

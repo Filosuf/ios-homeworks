@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -17,8 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let mainCoordinator: MainCoordinator = MainCoordinatorImp()
-//        window?.rootViewController = mainCoordinator.startApplication()
-        window?.rootViewController = InfoViewController()
+        let user = FirebaseAuth.Auth.auth().currentUser
+        window?.rootViewController = mainCoordinator.startApplication(userEmail: user?.email)
+//        window?.rootViewController = InfoViewController()
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light
 //        let appConfiguration = AppConfiguration.allCases.randomElement()!

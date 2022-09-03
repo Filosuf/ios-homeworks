@@ -19,9 +19,30 @@ final class LoginViewModel {
 
     func login(login: String, password: String) {
         do {
-            let authorizationSuccessful = try LoginInspector().check(login: login, password: password)
-            if authorizationSuccessful {
-                coordinator.showProfile(userName: login)
+            try LoginInspector().checkCredentials(login: login, password: password) { [weak self] success in
+                if success {
+                    self?.coordinator.showProfile(userName: login)
+                } else {
+                    self?.coordinator.showAlert(title: "Error", message: "Пара Имя пользователя/Пароль не найдена")
+                }
+            }
+        } catch LoginError.loginIsEmpty {
+            coordinator.showAlert(title: "Ошибка", message: "Введите имя пользователя")
+        } catch LoginError.passwordIsEmpty {
+            coordinator.showAlert(title: "Ошибка", message: "Введите пароль")
+        } catch {
+
+        }
+    }
+
+    func signUp(login: String, password: String) {
+        do {
+            try LoginInspector().signUp(login: login, password: password) { [weak self] error in
+                if error == nil {
+                    self?.coordinator.showAlert(title: "", message: "Пользователь зарегестрирован")
+                } else {
+                    self?.coordinator.showAlert(title: "Error", message: "\(error?.localizedDescription)")
+                }
             }
         } catch LoginError.loginIsEmpty {
             coordinator.showAlert(title: "Ошибка", message: "Введите имя пользователя")
@@ -33,7 +54,9 @@ final class LoginViewModel {
         } catch {
 
         }
+//        FirebaseAuth.Auth.auth().createUser(withEmail: login, password: password) { result, error in
+//            print(result)
+//            print(error)
+//        }
     }
-
-
 }
