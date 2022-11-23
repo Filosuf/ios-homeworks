@@ -19,7 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         let mainCoordinator: MainCoordinator = MainCoordinatorImp()
         let user = FirebaseAuth.Auth.auth().currentUser
-        window?.rootViewController = mainCoordinator.startApplication(userEmail: user?.email)
+//        Checker.shared.deleteLogin()
+        let login = Checker.shared.getLogin()
+        window?.rootViewController = mainCoordinator.startApplication(userEmail: login)
 //        window?.rootViewController = InfoViewController()
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light

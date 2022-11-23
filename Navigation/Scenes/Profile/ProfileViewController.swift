@@ -150,11 +150,7 @@ extension ProfileViewController: UITableViewDelegate {
 //MARK: - ProfileHeaderViewDelegate, FirebaseAuth
 extension ProfileViewController: ProfileHeaderViewDelegate {
     func didTapLogoutButton() {
-        do {
-            try FirebaseAuth.Auth.auth().signOut()
-            coordinator?.pop()
-        } catch {
-            print("Error signout")
-        }
+        Checker.shared.deleteLogin()
+        coordinator?.pop()
     }
 }

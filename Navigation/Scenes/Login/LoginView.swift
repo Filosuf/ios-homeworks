@@ -115,6 +115,7 @@ class LoginView: UIView {
         button.setBackgroundImage(UIImage(named: "blue_pixel.png")!.alpha(0.8), for: .disabled)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
+        button.isHidden = true
 
         return button
     }()
