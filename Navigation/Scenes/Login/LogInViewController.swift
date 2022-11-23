@@ -86,18 +86,11 @@ extension LogInViewController {
 
     func bruteForce(passwordToUnlock: String) {
         let lettersAndNumbers: [String] = String().lettersAndNumbers.map { String($0) }
-
         var password: String = ""
 
-        // Will strangely ends at 0000 instead of ~~~
-        while password != passwordToUnlock { // Increase MAXIMUM_PASSWORD_SIZE value for more
+        while password != passwordToUnlock {
             password = generateBruteForce(password, fromArray: lettersAndNumbers)
-            // Your stuff here
-//            print(password)
-            // Your stuff here
         }
-
-//        print(password)
     }
 
 }

@@ -108,7 +108,7 @@ class LoginView: UIView {
 
     private let signInButton: CustomButton = {
 
-        let button = CustomButton(title: "Sign In", titleColor: .white, backgroundColor: .blue)
+        let button = CustomButton(title: "Sign Up", titleColor: .white, backgroundColor: .blue)
         button.setBackgroundImage(UIImage(named: "blue_pixel.png")!.alpha(1), for: .normal)
         button.setBackgroundImage(UIImage(named: "blue_pixel.png")!.alpha(0.8), for: .selected)
         button.setBackgroundImage(UIImage(named: "blue_pixel.png")!.alpha(0.8), for: .highlighted)

@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/a1234/Desktop/Progects/Netology/IOSINT/Navigation/Navigation/Service/Database/DatabaseModel.swift">
+   </FileRef>
+   <FileRef
       location = "group:Navigation.xcodeproj">
    </FileRef>
    <FileRef

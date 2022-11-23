@@ -18,13 +18,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let mainCoordinator: MainCoordinator = MainCoordinatorImp()
-        let user = FirebaseAuth.Auth.auth().currentUser
-        window?.rootViewController = mainCoordinator.startApplication(userEmail: user?.email)
+        //получаем User если авторизован и передаем в координатор для отображения нужного экрана
+        //let user = FirebaseAuth.Auth.auth().currentUser
+        let debug = Checker.shared.writeDebug()
+        let user = Checker.shared.getLogin()
+        window?.rootViewController = mainCoordinator.startApplication(userEmail: user)
 //        window?.rootViewController = InfoViewController()
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light
-//        let appConfiguration = AppConfiguration.allCases.randomElement()!
-//        NetworkService.request(for: appConfiguration)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
