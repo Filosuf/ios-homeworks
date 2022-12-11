@@ -34,17 +34,18 @@ enum TabBarPage {
 }
 
 protocol MainCoordinator {
-    func startApplication() -> UIViewController
+    func startApplication(userEmail: String?) -> UIViewController
 }
 
 final class MainCoordinatorImp: MainCoordinator {
 
     private let controllersFactory = ControllersFactory()
-
+    private var userEmail: String?
 
     // проверка авторизован ли юзер
     // показать либо экран авторизации, либо новостную ленту
-    func startApplication() -> UIViewController {
+    func startApplication(userEmail: String?) -> UIViewController {
+        self.userEmail = userEmail
         return getTabBarController()
     }
 
@@ -71,6 +72,14 @@ final class MainCoordinatorImp: MainCoordinator {
               let profileChildCoordinator = ProfileFlowCoordinator(navCon: navigationVC, controllersFactory: controllersFactory)
               let logInVC = controllersFactory.makeLoginViewController(coordinator: profileChildCoordinator)
               navigationVC.pushViewController(logInVC, animated: true)
+              //открываем экран профиля, если пользователь авторизован
+              if let userEmail = userEmail {
+                  let profileVC =  controllersFactory.makeProfileViewController(
+                    userName: userEmail,
+                    coordinator: profileChildCoordinator
+                  )
+                  navigationVC.pushViewController(profileVC, animated: true)
+              }
           }
 
           return navigationVC

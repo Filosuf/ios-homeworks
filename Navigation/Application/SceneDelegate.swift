@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -17,12 +18,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let mainCoordinator: MainCoordinator = MainCoordinatorImp()
-        window?.rootViewController = mainCoordinator.startApplication()
-//        window?.rootViewController = MainTabBarController(loginFactory: loginFactory)
-//        window?.rootViewController = ProfileViewController(userService: TestUserService(), userName: "login")
-//        window?.rootViewController = PhotosViewController()
+        let user = FirebaseAuth.Auth.auth().currentUser
+//        Checker.shared.deleteLogin()
+        let login = Checker.shared.getLogin()
+        window?.rootViewController = mainCoordinator.startApplication(userEmail: login)
+//        window?.rootViewController = InfoViewController()
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light
+//        let appConfiguration = AppConfiguration.allCases.randomElement()!
+//        NetworkService.request(for: appConfiguration)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

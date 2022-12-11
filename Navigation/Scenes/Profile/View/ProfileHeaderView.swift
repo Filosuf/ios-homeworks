@@ -8,10 +8,15 @@
 import UIKit
 import SnapKit
 
+protocol ProfileHeaderViewDelegate: AnyObject {
+    func didTapLogoutButton()
+}
+
 final class ProfileHeaderView: UIView {
 
     //MARK: - Properties
-    
+
+    private weak var delegate: ProfileHeaderViewDelegate?
     private var statusText = ""
     private var defaultAvatarCenter: CGPoint = CGPoint(x: 0, y: 0)
 
@@ -112,10 +117,18 @@ final class ProfileHeaderView: UIView {
         return textField
     }()
 
-    //MARK: - LifeCicle
+    private let logoutButton: CustomButton = {
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+        let button = CustomButton(title: "logout", titleColor: .white, backgroundColor: .systemOrange)
+        button.layer.cornerRadius = 10
+
+        return button
+    }()
+
+    //MARK: - LifeCicle
+    init(delegate: ProfileHeaderViewDelegate?) {
+        super.init(frame: CGRect.zero)
+        self.delegate = delegate
         backgroundColor = .white
         layout()
         taps()
@@ -181,6 +194,10 @@ final class ProfileHeaderView: UIView {
             self?.statusLabel.text = self?.statusText
             self?.endEditing(true)
         }
+        logoutButton.tapAction =  { [weak self] in
+            guard let self = self else {return}
+            self.delegate?.didTapLogoutButton()
+        }
 
     }
 
@@ -200,7 +217,14 @@ final class ProfileHeaderView: UIView {
     private func layout() {
         let spaseInterval: CGFloat = 16
 
-        [nameLabel, statusLabel, showStatusButton, statusSetTextField, blurEffectView, profileImage, xmarkButton].forEach { self.addSubview($0) }
+        [nameLabel,
+         statusLabel,
+         showStatusButton,
+         statusSetTextField,
+         blurEffectView,
+         profileImage,
+         logoutButton,
+         xmarkButton].forEach { self.addSubview($0) }
 
         profileImage.snp.makeConstraints{
             $0.top.equalToSuperview().offset(spaseInterval)
@@ -235,6 +259,12 @@ final class ProfileHeaderView: UIView {
             $0.leading.equalTo(nameLabel.snp.leading)
             $0.trailing.equalToSuperview().offset(-spaseInterval)
             $0.height.equalTo(40)
+        }
+
+        logoutButton.snp.makeConstraints {
+            $0.top.equalTo(nameLabel)
+            $0.trailing.equalTo(showStatusButton.snp.trailing)
+            $0.width.equalTo(75)
         }
 
         xmarkButton.snp.makeConstraints{

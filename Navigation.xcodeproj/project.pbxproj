@@ -32,8 +32,12 @@
 		7C4E6738289E8D1400716248 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4E6737289E8D1400716248 /* LoginViewModel.swift */; };
 		7C4E673A28A259E200716248 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4E673928A259E200716248 /* String+Extension.swift */; };
 		7C6B1D1028ACCA6100399CE0 /* sample3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7C6B1D0F28ACCA6100399CE0 /* sample3.m4a */; };
+		7C6B1D1228AD2EA400399CE0 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B1D1128AD2EA400399CE0 /* NetworkService.swift */; };
+		7C6B1D1428AF6CDD00399CE0 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B1D1328AF6CDC00399CE0 /* InfoView.swift */; };
 		7C70C39628AA6F75004C5600 /* VoiceRecController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C70C39528AA6F75004C5600 /* VoiceRecController.swift */; };
 		7C70C39828AA7007004C5600 /* VoiceRecView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C70C39728AA7007004C5600 /* VoiceRecView.swift */; };
+		7C853C66292E53D500003C08 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 7C853C65292E53D500003C08 /* Realm */; };
+		7C853C68292E53D500003C08 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7C853C67292E53D500003C08 /* RealmSwift */; };
 		7CC5039D27D4C1DA00BAD3C1 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC5039C27D4C1DA00BAD3C1 /* FeedViewController.swift */; };
 		7CC5039F27D4C23C00BAD3C1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC5039E27D4C23C00BAD3C1 /* ProfileViewController.swift */; };
 		7CC503A127D520D900BAD3C1 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC503A027D520D900BAD3C1 /* PostViewController.swift */; };
@@ -57,6 +61,7 @@
 		7CEEED16288898B800C730E9 /* ProfileFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEEED15288898B800C730E9 /* ProfileFlowCoordinator.swift */; };
 		7CEEED18288930AC00C730E9 /* FeedFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEEED17288930AC00C730E9 /* FeedFlowCoordinator.swift */; };
 		7CEEED1A288C2BE700C730E9 /* ControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEEED19288C2BE700C730E9 /* ControllersFactory.swift */; };
+		7CEFA8B528B7C96800936A5E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CEFA8B428B7C96800936A5E /* GoogleService-Info.plist */; };
 		7CFD3C7427FEF829000D4F8C /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3C7327FEF829000D4F8C /* PhotosViewController.swift */; };
 		7CFD3C7827FF6DED000D4F8C /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3C7727FF6DED000D4F8C /* PhotosCollectionViewCell.swift */; };
 		7CFD3C7A27FFEBE4000D4F8C /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3C7927FFEBE4000D4F8C /* UITableViewCell+Extension.swift */; };
@@ -132,6 +137,8 @@
 		7C4E6737289E8D1400716248 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		7C4E673928A259E200716248 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		7C6B1D0F28ACCA6100399CE0 /* sample3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample3.m4a; sourceTree = "<group>"; };
+		7C6B1D1128AD2EA400399CE0 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		7C6B1D1328AF6CDC00399CE0 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		7C70C39528AA6F75004C5600 /* VoiceRecController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecController.swift; sourceTree = "<group>"; };
 		7C70C39728AA7007004C5600 /* VoiceRecView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecView.swift; sourceTree = "<group>"; };
 		7CC5039C27D4C1DA00BAD3C1 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +164,7 @@
 		7CEEED15288898B800C730E9 /* ProfileFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFlowCoordinator.swift; sourceTree = "<group>"; };
 		7CEEED17288930AC00C730E9 /* FeedFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedFlowCoordinator.swift; sourceTree = "<group>"; };
 		7CEEED19288C2BE700C730E9 /* ControllersFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllersFactory.swift; sourceTree = "<group>"; };
+		7CEFA8B428B7C96800936A5E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7CFD3C7327FEF829000D4F8C /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		7CFD3C7727FF6DED000D4F8C /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		7CFD3C7927FFEBE4000D4F8C /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
@@ -172,6 +180,8 @@
 			files = (
 				7CEEECCE2859C76B00C730E9 /* iOSIntPackage in Frameworks */,
 				7C2A37B92852320600BAD47A /* StorageService.framework in Frameworks */,
+				7C853C66292E53D500003C08 /* Realm in Frameworks */,
+				7C853C68292E53D500003C08 /* RealmSwift in Frameworks */,
 				A7CE333534EAF8F2C840D207 /* Pods_Navigation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,6 +262,7 @@
 				7CC5039927D2A2B600BAD3C1 /* Application */,
 				7C1C68C12856820000F4B9B8 /* User */,
 				7CC5039B27D2A32B00BAD3C1 /* Resources */,
+				7CEFA8B428B7C96800936A5E /* GoogleService-Info.plist */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -401,6 +412,7 @@
 			isa = PBXGroup;
 			children = (
 				7CC503A227D524EA00BAD3C1 /* InfoViewController.swift */,
+				7C6B1D1328AF6CDC00399CE0 /* InfoView.swift */,
 			);
 			path = Info;
 			sourceTree = "<group>";
@@ -456,6 +468,7 @@
 			isa = PBXGroup;
 			children = (
 				7CEEECE52861E6E600C730E9 /* LoginChecker */,
+				7C6B1D1128AD2EA400399CE0 /* NetworkService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -512,6 +525,8 @@
 			name = Navigation;
 			packageProductDependencies = (
 				7CEEECCD2859C76B00C730E9 /* iOSIntPackage */,
+				7C853C65292E53D500003C08 /* Realm */,
+				7C853C67292E53D500003C08 /* RealmSwift */,
 			);
 			productName = Navigation;
 			productReference = 7C189E1327C824E200E683BF /* Navigation.app */;
@@ -589,6 +604,7 @@
 			mainGroup = 7C189E0A27C824E200E683BF;
 			packageReferences = (
 				7CEEECCC2859C76B00C730E9 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+				7C853C64292E53D500003C08 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 7C189E1427C824E200E683BF /* Products */;
 			projectDirPath = "";
@@ -607,6 +623,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C189E2327C824E500E683BF /* LaunchScreen.storyboard in Resources */,
+				7CEFA8B528B7C96800936A5E /* GoogleService-Info.plist in Resources */,
 				7C189E2027C824E500E683BF /* Assets.xcassets in Resources */,
 				7C6B1D1028ACCA6100399CE0 /* sample3.m4a in Resources */,
 			);
@@ -729,6 +746,7 @@
 				7CEEECD3285CA48600C730E9 /* CustomButton.swift in Sources */,
 				7CFD3C7427FEF829000D4F8C /* PhotosViewController.swift in Sources */,
 				7CEEECEF28620AC700C730E9 /* FeedModel.swift in Sources */,
+				7C6B1D1228AD2EA400399CE0 /* NetworkService.swift in Sources */,
 				7CC503A127D520D900BAD3C1 /* PostViewController.swift in Sources */,
 				7C189E1B27C824E200E683BF /* MainTabBarController.swift in Sources */,
 				7C1E843A27F827AC00784897 /* PostTableViewCell.swift in Sources */,
@@ -752,6 +770,7 @@
 				7CEEECD828605B4600C730E9 /* FeedView.swift in Sources */,
 				7CC503EF27DC69B300BAD3C1 /* ProfileHeaderView.swift in Sources */,
 				7C4E6738289E8D1400716248 /* LoginViewModel.swift in Sources */,
+				7C6B1D1428AF6CDD00399CE0 /* InfoView.swift in Sources */,
 				7CEEECED286205CE00C730E9 /* Photo.swift in Sources */,
 				7C1C68C52856831F00F4B9B8 /* UserService.swift in Sources */,
 				7CC5039D27D4C1DA00BAD3C1 /* FeedViewController.swift in Sources */,
@@ -1131,6 +1150,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7C853C64292E53D500003C08 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		7CEEECCC2859C76B00C730E9 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TrueMax/iOSIntPackage.git";
@@ -1142,6 +1169,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7C853C65292E53D500003C08 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C853C64292E53D500003C08 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		7C853C67292E53D500003C08 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C853C64292E53D500003C08 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		7CEEECCD2859C76B00C730E9 /* iOSIntPackage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7CEEECCC2859C76B00C730E9 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;

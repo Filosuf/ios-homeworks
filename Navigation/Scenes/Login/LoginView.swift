@@ -10,7 +10,7 @@ import SnapKit
 
 protocol LoginViewDelegate: AnyObject {
     func didTapLogInButton()
-    func didTapCrackPasswordButton()
+    func didTapSignUpButton()
 }
 
 class LoginView: UIView {
@@ -51,7 +51,7 @@ class LoginView: UIView {
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.backgroundColor = .systemGray6
-        textField.placeholder = "Email or phone"
+        textField.placeholder = "Email"
         textField.tintColor = UIColor(named: "#4885CC")
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
@@ -106,30 +106,24 @@ class LoginView: UIView {
         return button
     }()
 
-    private let crackPasswordButton: CustomButton = {
+    private let signInButton: CustomButton = {
 
-        let button = CustomButton(title: "Подобрать пароль", titleColor: .white, backgroundColor: .blue)
+        let button = CustomButton(title: "Sign In", titleColor: .white, backgroundColor: .blue)
         button.setBackgroundImage(UIImage(named: "blue_pixel.png")!.alpha(1), for: .normal)
         button.setBackgroundImage(UIImage(named: "blue_pixel.png")!.alpha(0.8), for: .selected)
         button.setBackgroundImage(UIImage(named: "blue_pixel.png")!.alpha(0.8), for: .highlighted)
         button.setBackgroundImage(UIImage(named: "blue_pixel.png")!.alpha(0.8), for: .disabled)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
+        button.isHidden = true
 
         return button
     }()
 
-    private let spinnerView: UIActivityIndicatorView = {
-        let activityView: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
-            activityView.hidesWhenStopped = true
-            activityView.translatesAutoresizingMaskIntoConstraints = false
-            return activityView
-        }()
-
     private lazy var debugHintLabel: UILabel = {
 
         let label = UILabel()
-        label.text = "login: login \npassword: qwerty"
+        label.text = "login: login2@bk.ru \npassword: qwerty"
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -138,7 +132,6 @@ class LoginView: UIView {
     }()
 
     //MARK: - LifeCicle
-
     init(delegate: LoginViewDelegate?) {
         super.init(frame: CGRect.zero)
         self.delegate = delegate
@@ -158,7 +151,6 @@ class LoginView: UIView {
     }
 
     //MARK: - Metods
-
     func addObserver() {
         nc.addObserver(self, selector: #selector(kdbShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.addObserver(self, selector: #selector(kdbHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -186,10 +178,9 @@ class LoginView: UIView {
         logInButton.tapAction = { [weak self] in
             self?.delegate?.didTapLogInButton()
         }
-        crackPasswordButton.tapAction = { [weak self] in
+        signInButton.tapAction = { [weak self] in
             guard let self = self else { return }
-            self.waitingSpinnerEnable(true)
-            self.delegate?.didTapCrackPasswordButton()
+            self.delegate?.didTapSignUpButton()
         }
     }
 
@@ -206,21 +197,12 @@ class LoginView: UIView {
         passwordTextField.text = password
     }
 
-    func waitingSpinnerEnable(_ active: Bool) {
-        if active {
-            spinnerView.startAnimating()
-        } else {
-            spinnerView.stopAnimating()
-        }
-    }
-
     private func layout() {
         [logoImage,
          loginTextField,
          passwordTextField,
          logInButton,
-         crackPasswordButton,
-         spinnerView,
+         signInButton,
          debugHintLabel
         ].forEach { contentView.addSubview($0)}
 
@@ -255,16 +237,11 @@ class LoginView: UIView {
             $0.height.equalTo(50)
         }
 
-        crackPasswordButton.snp.makeConstraints{
-            $0.top.equalTo(logInButton.snp.bottom).offset(16)
+        signInButton.snp.makeConstraints{
+            $0.top.equalTo(logInButton.snp.bottom).offset(8)
             $0.leading.equalTo(contentView.snp.leading).offset(16)
             $0.trailing.equalTo(contentView.snp.trailing).offset(-16)
             $0.height.equalTo(50)
-        }
-
-        spinnerView.snp.makeConstraints{
-            $0.top.equalTo(crackPasswordButton.snp.bottom).offset(16)
-            $0.centerX.equalTo(crackPasswordButton.snp.centerX)
             $0.bottom.equalTo(contentView.snp.bottom)
         }
 
