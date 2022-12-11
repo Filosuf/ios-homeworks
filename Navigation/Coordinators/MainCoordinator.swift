@@ -13,6 +13,7 @@ import UIKit
 enum TabBarPage {
     case feed
     case profile
+    case favoritePosts
 
     var pageTitle: String {
         switch self {
@@ -20,6 +21,8 @@ enum TabBarPage {
             return "Лента"
         case .profile:
             return "Профиль"
+        case .favoritePosts:
+            return "Like"
         }
     }
 
@@ -29,6 +32,8 @@ enum TabBarPage {
             return UIImage(systemName: "list.bullet")
         case .profile:
             return UIImage(systemName: "person.crop.circle")
+        case .favoritePosts:
+            return UIImage(systemName: "heart")
         }
     }
 }
@@ -52,36 +57,39 @@ final class MainCoordinatorImp: MainCoordinator {
     //MARK: - Metods
     private func getTabBarController() -> UIViewController {
         let tabBarVC = MainTabBarController()
-        let pages: [TabBarPage] = [.feed, .profile]
+        let pages: [TabBarPage] = [.feed, .profile, .favoritePosts]
 
         tabBarVC.setViewControllers(pages.map { getNavController(page: $0) }, animated: true)
         return tabBarVC
     }
 
-      private func getNavController(page: TabBarPage) -> UINavigationController {
-          let navigationVC = UINavigationController()
-          navigationVC.tabBarItem.image = page.image
-          navigationVC.tabBarItem.title = page.pageTitle
+    private func getNavController(page: TabBarPage) -> UINavigationController {
+        let navigationVC = UINavigationController()
+        navigationVC.tabBarItem.image = page.image
+        navigationVC.tabBarItem.title = page.pageTitle
 
-          switch page {
-          case .feed:
-              let feedChildCoordinator = FeedFlowCoordinator(navCon: navigationVC, controllersFactory: controllersFactory)
-              let feedVC = controllersFactory.makeFeedViewController(coordinator: feedChildCoordinator)
-              navigationVC.pushViewController(feedVC, animated: true)
-          case .profile:
-              let profileChildCoordinator = ProfileFlowCoordinator(navCon: navigationVC, controllersFactory: controllersFactory)
-              let logInVC = controllersFactory.makeLoginViewController(coordinator: profileChildCoordinator)
-              navigationVC.pushViewController(logInVC, animated: true)
-              //открываем экран профиля, если пользователь авторизован
-              if let userEmail = userEmail {
-                  let profileVC =  controllersFactory.makeProfileViewController(
+        switch page {
+        case .feed:
+            let feedChildCoordinator = FeedFlowCoordinator(navCon: navigationVC, controllersFactory: controllersFactory)
+            let feedVC = controllersFactory.makeFeedViewController(coordinator: feedChildCoordinator)
+            navigationVC.pushViewController(feedVC, animated: true)
+        case .profile:
+            let profileChildCoordinator = ProfileFlowCoordinator(navCon: navigationVC, controllersFactory: controllersFactory)
+            let logInVC = controllersFactory.makeLoginViewController(coordinator: profileChildCoordinator)
+            navigationVC.pushViewController(logInVC, animated: true)
+            //открываем экран профиля, если пользователь авторизован
+            if let userEmail = userEmail {
+                let profileVC =  controllersFactory.makeProfileViewController(
                     userName: userEmail,
                     coordinator: profileChildCoordinator
-                  )
-                  navigationVC.pushViewController(profileVC, animated: true)
-              }
-          }
+                )
+                navigationVC.pushViewController(profileVC, animated: true)
+            }
+        case .favoritePosts:
+            let favoritePostsVC = controllersFactory.makeFavoritePostsVC()
+            navigationVC.pushViewController(favoritePostsVC, animated: true)
+        }
 
-          return navigationVC
-      }
+        return navigationVC
+    }
 }

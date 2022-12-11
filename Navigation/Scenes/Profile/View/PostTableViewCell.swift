@@ -12,6 +12,8 @@ import iOSIntPackage
 class PostTableViewCell: UITableViewCell {
 
     private let imageProcessor = ImageProcessor()
+    private var post: Post?
+    var likePostAction: ((Post) -> Void)?
 
     private let postAuthorLabel: UILabel = {
 
@@ -67,11 +69,26 @@ class PostTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        selectionStyle = .none
         layout()
+        addLikePostGesture()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func addLikePostGesture() {
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(likePost))
+        doubleTap.numberOfTapsRequired = 2
+        addGestureRecognizer(doubleTap)
+    }
+
+    @objc
+    private func likePost() {
+        guard let post = post else { return }
+        print("Двойное нажатие сработало")
+        likePostAction?(post)
     }
 
     func setupCell(post: Post) {
@@ -84,6 +101,7 @@ class PostTableViewCell: UITableViewCell {
         postDescriptionLabel.text = post.description
         postLikesLabel.text = "Likes: \(post.likes)"
         postViewsLabel.text = "Views: \(post.views)"
+        self.post = post
     }
 
     private func layout() {
