@@ -28,12 +28,46 @@ final class FavouritePostsRepository {
 
     // MARK: - Methods
     func save(_ post: Post) {
-        PostDataModel.create(with: post, using: persistentContainer.viewContext)
+        persistentContainer.performBackgroundTask { contextBackground in
+            if self.getPost(image: post.image, context: contextBackground) != nil { return }
+            PostDataModel.create(with: post, using: contextBackground)
+        }
     }
 
-    func getAllPosts() -> [Post] {
-        let request = NSFetchRequest<PostDataModel>(entityName: "PostDataModel")
+    func getPosts(author: String? = nil) -> [Post] {
+        let request = PostDataModel.fetchRequest()
+        if let author = author, author != ""  {
+            request.predicate = NSPredicate(format: "author contains[c] %@", author)
+        }
         guard let fetchRequestResult = try? persistentContainer.viewContext.fetch(request) else { return [] }
         return fetchRequestResult.map { $0.toPost() }
+    }
+
+    func getPost(image: String, context: NSManagedObjectContext) -> PostDataModel? {
+        let request = PostDataModel.fetchRequest()
+        request.predicate = NSPredicate(format: "image == %@", image)
+        return (try? context.fetch(request))?.first
+    }
+
+    func deleteObject(_ post: Post) {
+        //PostDataModel.delete(with: post, using: persistentContainer.viewContext)
+        let context = persistentContainer.viewContext
+
+        if let post = getPost(image: post.image, context: context) {
+            context.delete(post)
+            saveContext()
+        }
+    }
+
+    func saveContext () {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+               let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
     }
 }

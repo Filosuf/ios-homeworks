@@ -87,7 +87,6 @@ class PostTableViewCell: UITableViewCell {
     @objc
     private func likePost() {
         guard let post = post else { return }
-        print("Двойное нажатие сработало")
         likePostAction?(post)
     }
 

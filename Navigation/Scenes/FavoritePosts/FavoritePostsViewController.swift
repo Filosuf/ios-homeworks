@@ -11,8 +11,9 @@ class FavoritePostsViewController: UIViewController {
 
     //MARK: - Properties
 
-    private var myPosts = [Post]() { didSet {
-        tableView.reloadData() } }
+    private var myPosts = [Post]()
+    private let favouritePostsRepository = FavouritePostsRepository.shared
+    private let searchController = UISearchController(searchResultsController: nil)
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -36,6 +37,8 @@ class FavoritePostsViewController: UIViewController {
         super.viewDidLoad()
         title = "FavoritePosts"
         view.backgroundColor = .white
+        searchController.searchResultsUpdater = self
+        navigationItem.searchController = searchController
         getPosts()
         layout()
     }
@@ -43,18 +46,14 @@ class FavoritePostsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getPosts()
-//        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-//
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        navigationController?.setNavigationBarHidden(false, animated: animated)
-//    }
-    //MARK: - Methods
 
+    //MARK: - Methods
     private func getPosts() {
-        myPosts = FavouritePostsRepository.shared.getAllPosts()
+        myPosts = favouritePostsRepository.getPosts()
+        tableView.reloadData()
     }
+
 
     private func layout() {
         [tableView].forEach { view.addSubview($0) }
@@ -66,6 +65,13 @@ class FavoritePostsViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+}
+//MARK: - UITableViewDataSource
+extension FavoritePostsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        myPosts = favouritePostsRepository.getPosts(author: searchController.searchBar.text)
+        tableView.reloadData()
     }
 }
 
@@ -80,12 +86,20 @@ extension FavoritePostsViewController: UITableViewDataSource {
         cell.setupCell(post: myPosts[indexPath.row])
         return cell
     }
-
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        2
-//    }
 }
 //MARK: - UITableViewDelegate
 extension FavoritePostsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { [weak self] (contextualAction, view, boolValue) in
 
+            guard let self = self else { return }
+
+            self.favouritePostsRepository.deleteObject(self.myPosts[indexPath.row])
+            self.myPosts.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
+
+        return swipeActions
+    }
 }

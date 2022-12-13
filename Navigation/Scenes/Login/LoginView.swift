@@ -197,6 +197,11 @@ class LoginView: UIView {
         passwordTextField.text = password
     }
 
+    func setForDebug() {
+        loginTextField.text = "login2@bk.ru"
+        passwordTextField.isSecureTextEntry = false
+        passwordTextField.text = "qwerty"
+    }
     private func layout() {
         [logoImage,
          loginTextField,

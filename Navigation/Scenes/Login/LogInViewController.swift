@@ -41,6 +41,8 @@ final class LogInViewController: UIViewController {
         super.viewWillAppear(animated)
         //очищаем поле пароля
         loginView.setPassword(password: "", isSecure: true)
+        //default поле пароля
+        loginView.setForDebug()
     }
     // MARK: - Metods
     private func layout() {
