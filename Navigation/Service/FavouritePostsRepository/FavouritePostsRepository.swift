@@ -18,6 +18,7 @@ final class FavouritePostsRepository {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
 
@@ -50,13 +51,18 @@ final class FavouritePostsRepository {
     }
 
     func deleteObject(_ post: Post) {
-        //PostDataModel.delete(with: post, using: persistentContainer.viewContext)
         let context = persistentContainer.viewContext
 
         if let post = getPost(image: post.image, context: context) {
             context.delete(post)
             saveContext()
         }
+    }
+
+    func deleteObject(_ post: PostDataModel) {
+        let context = persistentContainer.viewContext
+        context.delete(post)
+        saveContext()
     }
 
     func saveContext () {

@@ -7,15 +7,27 @@
 
 import UIKit
 import StorageService
-class FavoritePostsViewController: UIViewController {
+import CoreData
+
+class FavoritePostsViewController: UIViewController, NSFetchedResultsControllerDelegate {
 
     //MARK: - Properties
+
+    let fetchResultController: NSFetchedResultsController<PostDataModel> = {
+        let fetchRequest = PostDataModel.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "likes", ascending: false)]
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                               managedObjectContext: FavouritePostsRepository.shared.persistentContainer.viewContext,
+                                                               sectionNameKeyPath: nil,
+                                                               cacheName: nil)
+        return frc
+    }()
 
     private var myPosts = [Post]()
     private let favouritePostsRepository = FavouritePostsRepository.shared
     private let searchController = UISearchController(searchResultsController: nil)
 
-    private lazy var tableView: UITableView = {
+    fileprivate lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
@@ -39,21 +51,27 @@ class FavoritePostsViewController: UIViewController {
         view.backgroundColor = .white
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
-        getPosts()
         layout()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        getPosts()
+        fetchResultController.delegate = self
+        try? fetchResultController.performFetch()
     }
 
     //MARK: - Methods
-    private func getPosts() {
-        myPosts = favouritePostsRepository.getPosts()
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .automatic)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .automatic)
+        case .move:
+            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        case .update:
+            tableView.reloadRows(at: [indexPath!], with: .automatic)
+        @unknown default:
+            tableView.reloadData()
+        }
         tableView.reloadData()
     }
-
 
     private func layout() {
         [tableView].forEach { view.addSubview($0) }
@@ -78,12 +96,13 @@ extension FavoritePostsViewController: UISearchResultsUpdating {
 //MARK: - UITableViewDataSource
 extension FavoritePostsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myPosts.count
+        return fetchResultController.sections?[section].numberOfObjects ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
-        cell.setupCell(post: myPosts[indexPath.row])
+        let postViewModel = fetchResultController.object(at: indexPath).toPost()
+        cell.setupCell(post: postViewModel)
         return cell
     }
 }
@@ -93,10 +112,8 @@ extension FavoritePostsViewController: UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { [weak self] (contextualAction, view, boolValue) in
 
             guard let self = self else { return }
-
-            self.favouritePostsRepository.deleteObject(self.myPosts[indexPath.row])
-            self.myPosts.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            let post = self.fetchResultController.object(at: indexPath)
+            self.favouritePostsRepository.deleteObject(post)
         }
         let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
 
