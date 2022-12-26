@@ -38,4 +38,9 @@ final class ControllersFactory {
         let photoVC = PhotosViewController()
         return photoVC
     }
+
+    func makeFavoritePostsVC() -> FavoritePostsViewController {
+        let favoritePostsVC = FavoritePostsViewController()
+        return favoritePostsVC
+    }
 }

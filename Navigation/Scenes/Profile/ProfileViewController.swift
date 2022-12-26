@@ -8,6 +8,7 @@
 
 import UIKit
 import StorageService
+import FirebaseAuth
 
 final class ProfileViewController: UIViewController {
 
@@ -18,7 +19,7 @@ final class ProfileViewController: UIViewController {
     private let userService: UserService
     private let userName: String
 
-    let profileHeaderView = ProfileHeaderView()
+    private lazy var profileHeaderView = ProfileHeaderView(delegate: self)
 
     static let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -31,7 +32,6 @@ final class ProfileViewController: UIViewController {
     }()
 
     //MARK: - LifeCicle
-    
     init(userService: UserService, userName: String, coordinator: ProfileFlowCoordinator) {
         self.userService = userService
         self.userName = userName
@@ -65,7 +65,7 @@ final class ProfileViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-
+    //MARK: - Methods
     func setTableView() {
         ProfileViewController.tableView.dataSource = self
         ProfileViewController.tableView.delegate = self
@@ -102,7 +102,7 @@ final class ProfileViewController: UIViewController {
     }
 
 }
-
+//MARK: - UITableViewDataSource
 extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
@@ -118,6 +118,9 @@ extension ProfileViewController: UITableViewDataSource {
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
         cell.setupCell(post: myPosts[indexPath.row])
+        cell.likePostAction = {
+            FavouritePostsRepository.shared.save($0)
+        }
         return cell
     }
 
@@ -125,7 +128,7 @@ extension ProfileViewController: UITableViewDataSource {
         2
     }
 }
-
+//MARK: - UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -145,5 +148,12 @@ extension ProfileViewController: UITableViewDelegate {
             coordinator?.showPhotos()
         }
     }
+}
 
+//MARK: - ProfileHeaderViewDelegate, FirebaseAuth
+extension ProfileViewController: ProfileHeaderViewDelegate {
+    func didTapLogoutButton() {
+        Checker.shared.deleteLogin()
+        coordinator?.pop()
+    }
 }

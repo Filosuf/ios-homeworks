@@ -181,6 +181,5 @@ final class FeedView: UIView {
             $0.top.equalTo(resultLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalTo(textField)
         }
-
     }
 }

@@ -17,9 +17,10 @@ enum LoginError: Error {
 
 class LoginInspector: LoginViewControllerDelegate {
 
-    func check(login: String, password: String) throws -> Bool {
-
-        let pairIsValid = Checker.shared.authorization(login: login, password: password)
+    func checkCredentials(login: String, password: String, success: @escaping (Bool) -> Void) throws {
+        Checker.shared.checkCredentials(login: login, password: password) { result in
+            success(result)
+        }
 
         switch (login, password) {
         case ("", _):
@@ -29,12 +30,20 @@ class LoginInspector: LoginViewControllerDelegate {
         default:
             break
         }
-        if pairIsValid == false {
-            throw LoginError.isInvalid
-        }
-
-        return pairIsValid
     }
 
-    
+    func signUp(login: String, password: String, success: @escaping (Error?) -> Void) throws {
+        Checker.shared.signUp(login: login, password: password) { result in
+            success(result)
+        }
+
+        switch (login, password) {
+        case ("", _):
+            throw LoginError.loginIsEmpty
+        case (_, ""):
+            throw LoginError.passwordIsEmpty
+        default:
+            break
+        }
+    }
 }

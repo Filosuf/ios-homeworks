@@ -10,7 +10,8 @@ import SnapKit
 
 protocol LoginViewControllerDelegate: AnyObject {
 
-    func check(login: String, password: String) throws -> Bool
+    func checkCredentials(login: String, password: String, success: @escaping (Bool) -> Void) throws
+    func signUp(login: String, password: String, success: @escaping (Error?) -> Void) throws
 }
 
 final class LogInViewController: UIViewController {
@@ -36,6 +37,13 @@ final class LogInViewController: UIViewController {
         layout()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //очищаем поле пароля
+        loginView.setPassword(password: "", isSecure: true)
+        //default поле пароля
+        loginView.setForDebug()
+    }
     // MARK: - Metods
     private func layout() {
         view.addSubview(loginView)
@@ -50,15 +58,11 @@ final class LogInViewController: UIViewController {
 // MARK: - LoginViewDelegate
 extension LogInViewController: LoginViewDelegate {
 
-    func didTapCrackPasswordButton() {
-        let generatedPassword = generatePassword(length: 3)
-        DispatchQueue.global().async {
-            self.bruteForce(passwordToUnlock: generatedPassword)
-            DispatchQueue.main.async {
-                self.loginView.waitingSpinnerEnable(false)
-                self.loginView.setPassword(password: generatedPassword, isSecure: false)
-            }
-        }
+    func didTapSignUpButton() {
+        let login = loginView.getLogin()
+        let password = loginView.getPassword()
+
+        viewModel.signUp(login: login, password: password)
     }
 
     func didTapLogInButton() {
