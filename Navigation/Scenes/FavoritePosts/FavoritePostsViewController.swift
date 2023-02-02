@@ -47,8 +47,8 @@ class FavoritePostsViewController: UIViewController, NSFetchedResultsControllerD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "FavoritePosts"
         view.backgroundColor = .white
+        title = "like".localized
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
         layout()
@@ -109,7 +109,7 @@ extension FavoritePostsViewController: UITableViewDataSource {
 //MARK: - UITableViewDelegate
 extension FavoritePostsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { [weak self] (contextualAction, view, boolValue) in
+        let deleteAction = UIContextualAction(style: .destructive, title: "delete".localized) { [weak self] (contextualAction, view, boolValue) in
 
             guard let self = self else { return }
             let post = self.fetchResultController.object(at: indexPath)

@@ -98,8 +98,8 @@ class PostTableViewCell: UITableViewCell {
             ImageProcessor().processImage(sourceImage: image, filter: filter) {postImage.image = $0}
         }
         postDescriptionLabel.text = post.description
-        postLikesLabel.text = "Likes: \(post.likes)"
-        postViewsLabel.text = "Views: \(post.views)"
+        postLikesLabel.text = "likes".localized + ": \(post.likes)"
+        postViewsLabel.text = String(format: "views".localized, post.views)
         self.post = post
     }
 

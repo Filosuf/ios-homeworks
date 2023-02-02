@@ -45,7 +45,6 @@ final class ProfileHeaderView: UIView {
     lazy var profileImage: UIImageView = {
 
         let image = UIImageView()
-//        image.image = UIImage(named: "avatarDog.jpg")
         image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 100 / 2
         image.layer.borderWidth = 3
@@ -63,7 +62,7 @@ final class ProfileHeaderView: UIView {
     private let nameLabel: UILabel = {
 
         let label = UILabel()
-        label.text = "User name"
+        label.text = "user_name".localized
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +73,7 @@ final class ProfileHeaderView: UIView {
     private let statusLabel: UILabel = {
 
         let label = UILabel()
-        label.text = "Status"
+        label.text = "status".localized
         label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +83,7 @@ final class ProfileHeaderView: UIView {
 
     private let showStatusButton: CustomButton = {
 
-        let button = CustomButton(title: "Set status", titleColor: .white, backgroundColor: .systemBlue)
+        let button = CustomButton(title: "set_status".localized, titleColor: .white, backgroundColor: .systemBlue)
         button.layer.cornerRadius = 4
         button.layer.shadowRadius = 4
         button.layer.shadowOpacity = 0.7
@@ -97,7 +96,7 @@ final class ProfileHeaderView: UIView {
     private lazy var statusSetTextField: UITextField = {
 
         let textField = UITextField()
-        textField.placeholder = "Введите новый статус"
+        textField.placeholder = "enter_new_status".localized
         textField.clearButtonMode = .whileEditing
         textField.textColor = .black
         textField.backgroundColor = .white
@@ -119,7 +118,7 @@ final class ProfileHeaderView: UIView {
 
     private let logoutButton: CustomButton = {
 
-        let button = CustomButton(title: "logout", titleColor: .white, backgroundColor: .systemOrange)
+        let button = CustomButton(title: "logout".localized, titleColor: .white, backgroundColor: .systemOrange)
         button.layer.cornerRadius = 10
 
         return button

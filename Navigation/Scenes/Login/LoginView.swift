@@ -51,7 +51,7 @@ class LoginView: UIView {
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.backgroundColor = .systemGray6
-        textField.placeholder = "Email"
+        textField.placeholder = "email".localized
         textField.tintColor = UIColor(named: "#4885CC")
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
@@ -75,7 +75,7 @@ class LoginView: UIView {
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.backgroundColor = .systemGray6
-        textField.placeholder = "Password"
+        textField.placeholder = "password".localized
         textField.isSecureTextEntry = true
         textField.tintColor = UIColor(named: "#4885CC")
         textField.autocapitalizationType = .none
