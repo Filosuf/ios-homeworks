@@ -63,7 +63,7 @@ final class ProfileHeaderView: UIView {
 
         let label = UILabel()
         label.text = "user_name".localized
-        label.textColor = .black
+        label.textColor = .label
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
 
@@ -98,12 +98,12 @@ final class ProfileHeaderView: UIView {
         let textField = UITextField()
         textField.placeholder = "enter_new_status".localized
         textField.clearButtonMode = .whileEditing
-        textField.textColor = .black
-        textField.backgroundColor = .white
+        textField.textColor = .label
+        textField.backgroundColor = .systemBackground
         textField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.borderColor = UIColor.createColor(lightMode: .black, darkMode: .white).cgColor
         textField.clipsToBounds = true
         textField.delegate = self
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
@@ -128,7 +128,7 @@ final class ProfileHeaderView: UIView {
     init(delegate: ProfileHeaderViewDelegate?) {
         super.init(frame: CGRect.zero)
         self.delegate = delegate
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         layout()
         taps()
     }
@@ -136,6 +136,10 @@ final class ProfileHeaderView: UIView {
     required init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        statusSetTextField.layer.borderColor = UIColor.createColor(lightMode: .black, darkMode: .white).cgColor
     }
 
     //MARK: - Metods

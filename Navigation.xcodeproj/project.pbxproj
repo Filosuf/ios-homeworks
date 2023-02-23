@@ -34,6 +34,7 @@
 		7C4E673A28A259E200716248 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4E673928A259E200716248 /* String+Extension.swift */; };
 		7C4F754E298BEF7400406056 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C4F7550298BEF7400406056 /* Localizable.strings */; };
 		7C4F7554298BF9B500406056 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7C4F7556298BF9B500406056 /* Localizable.stringsdict */; };
+		7C4F7582299E43FB00406056 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4F7581299E43FB00406056 /* UIColor+Extension.swift */; };
 		7C6B1D1028ACCA6100399CE0 /* sample3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7C6B1D0F28ACCA6100399CE0 /* sample3.m4a */; };
 		7C6B1D1228AD2EA400399CE0 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B1D1128AD2EA400399CE0 /* NetworkService.swift */; };
 		7C6B1D1428AF6CDD00399CE0 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B1D1328AF6CDC00399CE0 /* InfoView.swift */; };
@@ -147,6 +148,7 @@
 		7C4F7551298BEF7800406056 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C4F7555298BF9B500406056 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		7C4F7557298BF9BA00406056 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		7C4F7581299E43FB00406056 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		7C6B1D0F28ACCA6100399CE0 /* sample3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample3.m4a; sourceTree = "<group>"; };
 		7C6B1D1128AD2EA400399CE0 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		7C6B1D1328AF6CDC00399CE0 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 				7C1E843B27F88B9800784897 /* UIView+Extension.swift */,
 				7C1E843727F3B2ED00784897 /* UIImage+Alpha.swift */,
 				7CEEECF02863567900C730E9 /* Notification.Name + Extension.swift */,
+				7C4F7581299E43FB00406056 /* UIColor+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -809,6 +812,7 @@
 				7CEEECDA2860999500C730E9 /* LoginView.swift in Sources */,
 				7CC503A327D524EA00BAD3C1 /* InfoViewController.swift in Sources */,
 				7CEEECC92858D54500C730E9 /* LoginFactory .swift in Sources */,
+				7C4F7582299E43FB00406056 /* UIColor+Extension.swift in Sources */,
 				7CC5039F27D4C23C00BAD3C1 /* ProfileViewController.swift in Sources */,
 				7CEEECD828605B4600C730E9 /* FeedView.swift in Sources */,
 				7CC503EF27DC69B300BAD3C1 /* ProfileHeaderView.swift in Sources */,

@@ -47,7 +47,7 @@ class FavoritePostsViewController: UIViewController, NSFetchedResultsControllerD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         title = "like".localized
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
