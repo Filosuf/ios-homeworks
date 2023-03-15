@@ -46,6 +46,7 @@
 		7C853C66292E53D500003C08 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 7C853C65292E53D500003C08 /* Realm */; };
 		7C853C68292E53D500003C08 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7C853C67292E53D500003C08 /* RealmSwift */; };
 		7CC3469F29C09B700067062C /* MainCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC3469E29C09B700067062C /* MainCoordinatorTests.swift */; };
+		7CC346A229C1E6010067062C /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC346A129C1E6010067062C /* LocalAuthorizationService.swift */; };
 		7CC5039D27D4C1DA00BAD3C1 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC5039C27D4C1DA00BAD3C1 /* FeedViewController.swift */; };
 		7CC5039F27D4C23C00BAD3C1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC5039E27D4C23C00BAD3C1 /* ProfileViewController.swift */; };
 		7CC503A127D520D900BAD3C1 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC503A027D520D900BAD3C1 /* PostViewController.swift */; };
@@ -167,6 +168,7 @@
 		7C70C39728AA7007004C5600 /* VoiceRecView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecView.swift; sourceTree = "<group>"; };
 		7CB5BE7C29C097A20047C41F /* NavigationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NavigationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CC3469E29C09B700067062C /* MainCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorTests.swift; sourceTree = "<group>"; };
+		7CC346A129C1E6010067062C /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		7CC5039C27D4C1DA00BAD3C1 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		7CC5039E27D4C23C00BAD3C1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7CC503A027D520D900BAD3C1 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -535,6 +537,7 @@
 				7C6FC4E32938D54C00BB5524 /* FavouritePostsRepository */,
 				7CEEECE52861E6E600C730E9 /* LoginChecker */,
 				7C6B1D1128AD2EA400399CE0 /* NetworkService.swift */,
+				7CC346A129C1E6010067062C /* LocalAuthorizationService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -874,6 +877,7 @@
 				7CEEECD828605B4600C730E9 /* FeedView.swift in Sources */,
 				7CC503EF27DC69B300BAD3C1 /* ProfileHeaderView.swift in Sources */,
 				7C4E6738289E8D1400716248 /* LoginViewModel.swift in Sources */,
+				7CC346A229C1E6010067062C /* LocalAuthorizationService.swift in Sources */,
 				7C6B1D1428AF6CDD00399CE0 /* InfoView.swift in Sources */,
 				7CEEECED286205CE00C730E9 /* Photo.swift in Sources */,
 				7C1C68C52856831F00F4B9B8 /* UserService.swift in Sources */,

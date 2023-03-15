@@ -43,6 +43,9 @@ final class LogInViewController: UIViewController {
         loginView.setPassword(password: "", isSecure: true)
         //default поле пароля
         loginView.setForDebug()
+        //FaceID/TouchID
+        let biometryType = viewModel.getBiometryType()
+        loginView.setBiometricButton(biometryType: biometryType)
     }
     // MARK: - Metods
     private func layout() {
@@ -70,6 +73,10 @@ extension LogInViewController: LoginViewDelegate {
         let password = loginView.getPassword()
 
         viewModel.login(login: login, password: password)
+    }
+
+    func didTapBiometricLoginButton() {
+        viewModel.biometricLogin()
     }
 }
 

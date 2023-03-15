@@ -11,6 +11,7 @@ import SnapKit
 protocol LoginViewDelegate: AnyObject {
     func didTapLogInButton()
     func didTapSignUpButton()
+    func didTapBiometricLoginButton()
 }
 
 class LoginView: UIView {
@@ -120,6 +121,13 @@ class LoginView: UIView {
         return button
     }()
 
+    private let biometricLoginButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(systemName: "faceid"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     private lazy var debugHintLabel: UILabel = {
 
         let label = UILabel()
@@ -182,6 +190,11 @@ class LoginView: UIView {
             guard let self = self else { return }
             self.delegate?.didTapSignUpButton()
         }
+        biometricLoginButton.addTarget(self, action: #selector(handleBiometricTap), for: .touchUpInside)
+    }
+
+    @objc private func handleBiometricTap() {
+        delegate?.didTapBiometricLoginButton()
     }
 
     func getLogin() -> String{
@@ -202,12 +215,28 @@ class LoginView: UIView {
         passwordTextField.isSecureTextEntry = false
         passwordTextField.text = "qwerty"
     }
+
+    func setBiometricButton(biometryType: Int) {
+        var iconName = ""
+        switch biometryType {
+        case 1:
+            iconName = "touchid"
+        case 2:
+            iconName = "faceid"
+        default:
+            iconName = ""
+        }
+        let icon = UIImage(systemName: iconName)
+        biometricLoginButton.setBackgroundImage(icon, for: .normal)
+    }
+
     private func layout() {
         [logoImage,
          loginTextField,
          passwordTextField,
          logInButton,
          signInButton,
+         biometricLoginButton,
          debugHintLabel
         ].forEach { contentView.addSubview($0)}
 
@@ -247,7 +276,13 @@ class LoginView: UIView {
             $0.leading.equalTo(contentView.snp.leading).offset(16)
             $0.trailing.equalTo(contentView.snp.trailing).offset(-16)
             $0.height.equalTo(50)
-            $0.bottom.equalTo(contentView.snp.bottom)
+        }
+
+        biometricLoginButton.snp.makeConstraints{
+            $0.top.equalTo(signInButton.snp.bottom).offset(8)
+            $0.centerX.equalTo(contentView.snp.centerX)
+            $0.height.width.equalTo(70)
+            $0.bottom.equalTo(contentView.snp.bottom).offset(-16)
         }
 
         debugHintLabel.snp.makeConstraints{
