@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by Filosuf on 02.02.2023.
+  
+*/
+//TabBar
+"delete" = "Delete";
+"feed" = "Feed";
+"profile" = "Profile";
+"like" = "Like";
+//Login
+"email" = "Email";
+"password" = "Password";
+//Profile
+//ProfileHeaderView
+"user_name" = "User name";
+"status" = "Status";
+"set_status" = "Set status";
+"enter_new_status" = "Enter a new status";
+"logout" = "logout";
+//PhotosTableViewCell
+"photos" = "Photos";
+//PostTableViewCell
+"likes" = "Likes";
+//"views" = "Views";

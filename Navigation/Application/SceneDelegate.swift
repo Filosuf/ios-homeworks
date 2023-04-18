@@ -18,13 +18,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let mainCoordinator: MainCoordinator = MainCoordinatorImp()
-        let user = FirebaseAuth.Auth.auth().currentUser
+//        let user = FirebaseAuth.Auth.auth().currentUser
 //        Checker.shared.deleteLogin()
         let login = Checker.shared.getLogin()
         window?.rootViewController = mainCoordinator.startApplication(userEmail: login)
 //        window?.rootViewController = InfoViewController()
         window?.makeKeyAndVisible()
-        window?.overrideUserInterfaceStyle = .light
 //        let appConfiguration = AppConfiguration.allCases.randomElement()!
 //        NetworkService.request(for: appConfiguration)
     }

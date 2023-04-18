@@ -18,11 +18,11 @@ enum TabBarPage {
     var pageTitle: String {
         switch self {
         case .feed:
-            return "Лента"
+            return "feed".localized
         case .profile:
-            return "Профиль"
+            return "profile".localized
         case .favoritePosts:
-            return "Like"
+            return "like".localized
         }
     }
 

@@ -33,7 +33,7 @@ class PhotosViewController: UIViewController {
         title = "Photo Gallery"
         view.backgroundColor = .white
         layout()
-        // Загрука изображений в массив изображений 'imagesDelayArray' с задержкой
+        // Загрузка изображений в массив изображений 'imagesDelayArray' с задержкой
         imagePublisherFacade.subscribe(self)
         imagePublisherFacade.addImagesWithTimer(time: 1, repeat: 20, userImages: Photo.makeArrayImages())
         // Проверка влияний приоритета потока при обработке изображений IOSINT HW-8

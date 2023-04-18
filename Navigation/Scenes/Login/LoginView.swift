@@ -48,10 +48,10 @@ class LoginView: UIView {
     private lazy var loginTextField: UITextField = {
 
         let textField = UITextField()
-        textField.textColor = .black
+        textField.textColor = .label
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.backgroundColor = .systemGray6
-        textField.placeholder = "Email"
+        textField.placeholder = "email".localized
         textField.tintColor = UIColor(named: "#4885CC")
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
@@ -72,10 +72,10 @@ class LoginView: UIView {
     private lazy var passwordTextField: UITextField = {
 
         let textField = UITextField()
-        textField.textColor = .black
+        textField.textColor = .label
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.backgroundColor = .systemGray6
-        textField.placeholder = "Password"
+        textField.placeholder = "password".localized
         textField.isSecureTextEntry = true
         textField.tintColor = UIColor(named: "#4885CC")
         textField.autocapitalizationType = .none
@@ -135,7 +135,7 @@ class LoginView: UIView {
     init(delegate: LoginViewDelegate?) {
         super.init(frame: CGRect.zero)
         self.delegate = delegate
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         addObserver()
         layout()
         taps()
@@ -266,7 +266,6 @@ class LoginView: UIView {
 }
 
 //MARK: - UITextFieldDelegate
-
 extension LoginView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         endEditing(true)

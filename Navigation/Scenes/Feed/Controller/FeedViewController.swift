@@ -30,9 +30,10 @@ class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Feed"
-        NotificationCenter.default.addObserver(self, selector: #selector(notificationAction), name: .updateIsValidWord, object: nil)
-        layout()
+        title = "feed".localized
+        view.backgroundColor = .systemBackground
+//        NotificationCenter.default.addObserver(self, selector: #selector(notificationAction), name: .updateIsValidWord, object: nil)
+//        layout()
     }
 
     //MARK: - Metods
@@ -53,7 +54,6 @@ class FeedViewController: UIViewController {
             $0.top.leading.trailing.bottom.equalToSuperview()
         }
     }
-
 }
 
 //MARK: - FeedViewDelegate
