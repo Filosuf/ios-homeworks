@@ -11,10 +11,12 @@ import UIKit
 final class LoginViewModel {
     private let loginInspector: LoginInspector
     private let coordinator: ProfileFlowCoordinator
+    private let localAuthorizationService: LocalAuthorizationService
 
-    init(loginFactory: LoginFactory, coordinator: ProfileFlowCoordinator) {
+    init(loginFactory: LoginFactory, coordinator: ProfileFlowCoordinator, localAuthorizationService: LocalAuthorizationService) {
         self.loginInspector = loginFactory.makeLoginInspector()
         self.coordinator = coordinator
+        self.localAuthorizationService = localAuthorizationService
     }
 
     func login(login: String, password: String) {
@@ -54,9 +56,20 @@ final class LoginViewModel {
         } catch {
 
         }
-//        FirebaseAuth.Auth.auth().createUser(withEmail: login, password: password) { result, error in
-//            print(result)
-//            print(error)
-//        }
+    }
+
+    func biometricLogin() {
+        localAuthorizationService.authorizeIfPossible { [weak self] result in
+            switch result {
+            case .success:
+                self?.coordinator.showProfile(userName: "login2@bk.ru")
+            case .failure(let error):
+                self?.coordinator.showAlert(title: "Error", message: error.localizedDescription)
+            }
+        }
+    }
+
+    func getBiometryType() -> Int {
+        localAuthorizationService.getBiometryType()
     }
 }

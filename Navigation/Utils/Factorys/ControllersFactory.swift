@@ -10,6 +10,7 @@ import Foundation
 final class ControllersFactory {
 
     let loginFactory = MyLoginFactory()
+    let localAuthorizationService = LocalAuthorizationService()
     var userService: UserService {
         #if DEBUG
             return TestUserService()
@@ -24,7 +25,7 @@ final class ControllersFactory {
     }
 
     func makeLoginViewController(coordinator: ProfileFlowCoordinator) -> LogInViewController {
-        let viewModel = LoginViewModel(loginFactory: loginFactory, coordinator: coordinator)
+        let viewModel = LoginViewModel(loginFactory: loginFactory, coordinator: coordinator, localAuthorizationService: localAuthorizationService)
         let logInVC = LogInViewController(viewModel: viewModel)
         return logInVC
     }

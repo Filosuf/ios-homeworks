@@ -76,14 +76,18 @@ final class MainCoordinatorImp: MainCoordinator {
         case .profile:
             let profileChildCoordinator = ProfileFlowCoordinator(navCon: navigationVC, controllersFactory: controllersFactory)
             let logInVC = controllersFactory.makeLoginViewController(coordinator: profileChildCoordinator)
-            navigationVC.pushViewController(logInVC, animated: true)
+//            navigationVC.pushViewController(logInVC, animated: true)
             //открываем экран профиля, если пользователь авторизован
             if let userEmail = userEmail {
                 let profileVC =  controllersFactory.makeProfileViewController(
                     userName: userEmail,
                     coordinator: profileChildCoordinator
                 )
-                navigationVC.pushViewController(profileVC, animated: true)
+//                navigationVC.pushViewController(profileVC, animated: true)
+                navigationVC.setViewControllers([logInVC, profileVC], animated: true)
+            }
+            else {
+                navigationVC.pushViewController(logInVC, animated: true)
             }
         case .favoritePosts:
             let favoritePostsVC = controllersFactory.makeFavoritePostsVC()

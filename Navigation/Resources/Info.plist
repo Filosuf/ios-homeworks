@@ -19,6 +19,8 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Face Id</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>fghfgh</string>
 </dict>
