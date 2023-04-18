@@ -7,14 +7,27 @@
 
 import UIKit
 import StorageService
-class FavoritePostsViewController: UIViewController {
+import CoreData
+
+class FavoritePostsViewController: UIViewController, NSFetchedResultsControllerDelegate {
 
     //MARK: - Properties
 
-    private var myPosts = [Post]() { didSet {
-        tableView.reloadData() } }
+    let fetchResultController: NSFetchedResultsController<PostDataModel> = {
+        let fetchRequest = PostDataModel.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "likes", ascending: false)]
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                               managedObjectContext: FavouritePostsRepository.shared.persistentContainer.viewContext,
+                                                               sectionNameKeyPath: nil,
+                                                               cacheName: nil)
+        return frc
+    }()
 
-    private lazy var tableView: UITableView = {
+    private var myPosts = [Post]()
+    private let favouritePostsRepository = FavouritePostsRepository.shared
+    private let searchController = UISearchController(searchResultsController: nil)
+
+    fileprivate lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
@@ -34,26 +47,30 @@ class FavoritePostsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "FavoritePosts"
-        view.backgroundColor = .white
-        getPosts()
+        view.backgroundColor = .systemBackground
+        title = "like".localized
+        searchController.searchResultsUpdater = self
+        navigationItem.searchController = searchController
         layout()
+        fetchResultController.delegate = self
+        try? fetchResultController.performFetch()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        getPosts()
-//        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-//
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        navigationController?.setNavigationBarHidden(false, animated: animated)
-//    }
     //MARK: - Methods
-
-    private func getPosts() {
-        myPosts = FavouritePostsRepository.shared.getAllPosts()
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .automatic)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .automatic)
+        case .move:
+            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        case .update:
+            tableView.reloadRows(at: [indexPath!], with: .automatic)
+        @unknown default:
+            tableView.reloadData()
+        }
+        tableView.reloadData()
     }
 
     private func layout() {
@@ -68,24 +85,38 @@ class FavoritePostsViewController: UIViewController {
         ])
     }
 }
+//MARK: - UITableViewDataSource
+extension FavoritePostsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        myPosts = favouritePostsRepository.getPosts(author: searchController.searchBar.text)
+        tableView.reloadData()
+    }
+}
 
 //MARK: - UITableViewDataSource
 extension FavoritePostsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myPosts.count
+        return fetchResultController.sections?[section].numberOfObjects ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
-        cell.setupCell(post: myPosts[indexPath.row])
+        let postViewModel = fetchResultController.object(at: indexPath).toPost()
+        cell.setupCell(post: postViewModel)
         return cell
     }
-
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        2
-//    }
 }
 //MARK: - UITableViewDelegate
 extension FavoritePostsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "delete".localized) { [weak self] (contextualAction, view, boolValue) in
 
+            guard let self = self else { return }
+            let post = self.fetchResultController.object(at: indexPath)
+            self.favouritePostsRepository.deleteObject(post)
+        }
+        let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
+
+        return swipeActions
+    }
 }

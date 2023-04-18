@@ -16,51 +16,42 @@ class PostTableViewCell: UITableViewCell {
     var likePostAction: ((Post) -> Void)?
 
     private let postAuthorLabel: UILabel = {
-
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .label
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
-
         return label
     }()
     
     private let postImage: UIImageView = {
-        
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.backgroundColor = .black
         image.translatesAutoresizingMaskIntoConstraints = false
-        
         return image
     }()
 
     private let postDescriptionLabel: UILabel = {
-
         let label = UILabel()
         label.textColor = .systemGray
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
-
         return label
     }()
 
     private let postLikesLabel: UILabel = {
-
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .secondaryLabel
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-
         return label
     }()
     
     private let postViewsLabel: UILabel = {
-
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .secondaryLabel
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .right
@@ -70,6 +61,7 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
+        backgroundColor = .systemBackground
         layout()
         addLikePostGesture()
     }
@@ -87,7 +79,6 @@ class PostTableViewCell: UITableViewCell {
     @objc
     private func likePost() {
         guard let post = post else { return }
-        print("Двойное нажатие сработало")
         likePostAction?(post)
     }
 
@@ -99,8 +90,8 @@ class PostTableViewCell: UITableViewCell {
             ImageProcessor().processImage(sourceImage: image, filter: filter) {postImage.image = $0}
         }
         postDescriptionLabel.text = post.description
-        postLikesLabel.text = "Likes: \(post.likes)"
-        postViewsLabel.text = "Views: \(post.views)"
+        postLikesLabel.text = "likes".localized + ": \(post.likes)"
+        postViewsLabel.text = String(format: "views".localized, post.views)
         self.post = post
     }
 

@@ -16,6 +16,8 @@ extension String {
     var printable:   String { return digits + letters + punctuation }
     var lettersAndNumbers: String { return digits + letters }
 
+    var localized: String { NSLocalizedString(self, comment: "") }
+
 
 
     mutating func replace(at index: Int, with character: Character) {

@@ -10,23 +10,20 @@ import UIKit
 class PhotosTableViewCell: UITableViewCell {
 
     private let photosLabel: UILabel = {
-
         let label = UILabel()
-        label.text = "Photos"
-        label.textColor = .black
+        label.text = "photos".localized
+        label.textColor = .label
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
-
         return label
     }()
 
     private let goToGalleryButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(systemName: "arrow.forward"), for: .normal)
-        button.tintColor = .black
+        button.tintColor = .createColor(lightMode: .black, darkMode: .white)
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
-
         return button
     }()
 
@@ -37,11 +34,16 @@ class PhotosTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .systemBackground
         layout()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        goToGalleryButton.tintColor = .createColor(lightMode: .black, darkMode: .white)
     }
 
     private func layout() {

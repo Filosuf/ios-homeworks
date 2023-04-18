@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by Filosuf on 02.02.2023.
+  
+*/
+//all
+"delete" = "Удалить";
+//TabBar
+"feed" = "Лента";
+"profile" = "Профиль";
+"like" = "Нравятся";
+//Login
+"email" = "Электронная почта";
+"password" = "Пароль";
+//Profile
+//ProfileHeaderView
+"user_name" = "Имя";
+"status" = "Статус";
+"set_status" = "Установить статус";
+"enter_new_status" = "Введите новый статус";
+"logout" = "Выход";
+//PhotosTableViewCell
+"photos" = "Фото";
+//PostTableViewCell
+"likes" = "Нравится";
+//"views" = "Просмотров";

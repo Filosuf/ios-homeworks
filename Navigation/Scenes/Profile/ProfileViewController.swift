@@ -54,6 +54,7 @@ final class ProfileViewController: UIViewController {
         setTableView()
         loadUser(userName: userName)
         layout()
+        view.backgroundColor = .systemBackground
     }
 
     override func viewWillAppear(_ animated: Bool) {
